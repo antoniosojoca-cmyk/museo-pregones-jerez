@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,79 +22,76 @@
 
     body {
       margin: 0;
-      background: #080706;
+      background: #070605;
       color: #eee4d0;
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    /* CABECERA */
+
+    /* ==============================
+       CABECERA
+    ============================== */
 
     header {
-      min-height: 48vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       text-align: center;
-
-      padding: 70px 20px;
+      padding: 55px 20px 35px;
 
       background:
         radial-gradient(
           circle at center,
-          rgba(102, 78, 35, 0.18),
-          transparent 60%
+          rgba(115, 88, 40, 0.18),
+          transparent 65%
         ),
         #0b0907;
 
       border-bottom: 1px solid #80683c;
     }
 
-    .cabecera-contenido {
-      max-width: 900px;
-    }
-
-    .sala {
+    .sala-numero {
+      color: #a98a4e;
       font-size: 14px;
       letter-spacing: 5px;
-      color: #a88a4d;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     header h1 {
       margin: 0;
-      font-size: clamp(42px, 7vw, 76px);
+      color: #d8b96e;
+      font-size: clamp(40px, 7vw, 70px);
       font-weight: normal;
       letter-spacing: 3px;
-      color: #d7b86d;
     }
 
     header h2 {
-      margin: 18px 0 0;
-      font-size: clamp(22px, 3vw, 32px);
+      margin: 12px 0 0;
+      color: #d8ccb5;
+      font-size: 24px;
       font-weight: normal;
-      color: #ddd0b7;
     }
 
     .linea {
-      width: 100px;
+      width: 90px;
       height: 1px;
       background: #a88a4d;
-      margin: 28px auto;
+      margin: 22px auto;
     }
 
     header p {
-      margin: 0 auto;
-      max-width: 700px;
-      color: #aaa08e;
-      font-size: 17px;
+      max-width: 760px;
+      margin: auto;
+      color: #aaa08d;
+      font-size: 16px;
       line-height: 1.7;
     }
 
-    /* NAVEGACIÓN */
+
+    /* ==============================
+       VOLVER
+    ============================== */
 
     .volver {
       text-align: center;
-      padding: 24px 15px;
+      padding: 22px 15px;
       border-bottom: 1px solid #30281c;
     }
 
@@ -101,27 +99,22 @@
       color: #c9aa64;
       text-decoration: none;
       font-size: 15px;
-      letter-spacing: 1px;
     }
 
     .volver a:hover {
       color: #f0d38c;
     }
 
-    /* INTRODUCCIÓN */
+
+    /* ==============================
+       INTRODUCCIÓN
+    ============================== */
 
     .intro {
-      max-width: 900px;
-      margin: 65px auto 35px;
-      padding: 0 25px;
+      max-width: 850px;
+      margin: 35px auto 25px;
+      padding: 0 20px;
       text-align: center;
-    }
-
-    .intro h3 {
-      margin: 0 0 20px;
-      color: #d1b16a;
-      font-size: 28px;
-      font-weight: normal;
     }
 
     .intro p {
@@ -131,131 +124,228 @@
       line-height: 1.8;
     }
 
-    /* FRAGMENTOS */
 
-    .fragmentos {
-      max-width: 1100px;
-      margin: 50px auto 90px;
-      padding: 0 20px;
-    }
+    /* ==============================
+       CARRUSEL
+    ============================== */
 
-    .fragmento {
-      margin-bottom: 75px;
-      background: #100e0b;
-      border: 1px solid #5d4b2d;
-      padding: 12px;
+    .carrusel {
+      width: min(1200px, 94%);
+      margin: 35px auto 70px;
+
+      position: relative;
+
+      background: #0d0b09;
+      border: 1px solid #695633;
 
       box-shadow:
-        0 15px 40px rgba(0,0,0,0.45);
+        0 20px 55px rgba(0,0,0,0.65);
 
-      transition:
-        border-color 0.3s ease,
-        transform 0.3s ease;
-    }
-
-    .fragmento:hover {
-      border-color: #b49558;
-      transform: translateY(-3px);
-    }
-
-    /* IMAGEN */
-
-    .foto {
-      width: 100%;
-      height: 520px;
       overflow: hidden;
-      background: #050505;
     }
 
-    .foto img {
+
+    /* ==============================
+       IMAGEN
+    ============================== */
+
+    .imagen-carrusel {
+      width: 100%;
+      height: min(68vh, 650px);
+
+      background: #030303;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .imagen-carrusel img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+
+      object-fit: contain;
+
       display: block;
+
+      background: #030303;
+
+      transition: opacity 0.7s ease,
+                  transform 8s ease;
     }
 
-    /* TEXTO */
+    .imagen-carrusel img.cambio {
+      opacity: 0;
+    }
 
-    .contenido-fragmento {
+
+    /* ==============================
+       INFORMACIÓN
+    ============================== */
+
+    .informacion {
       text-align: center;
-      padding: 28px 20px 32px;
+      padding: 28px 20px 30px;
     }
 
-    .numero {
-      display: block;
-      color: #9d8148;
+    .fragmento-numero {
+      color: #9e8149;
       font-size: 13px;
       letter-spacing: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .contenido-fragmento h3 {
+    .informacion h3 {
       margin: 0;
-      color: #d7b86d;
-      font-size: 30px;
+      color: #d8b96e;
+      font-size: 32px;
       font-weight: normal;
     }
 
-    .contenido-fragmento .dedicado {
-      margin: 10px 0 4px;
-      color: #e0d4bd;
-      font-size: 20px;
+    .informacion .pregonero {
+      margin: 8px 0;
+      color: #d8ccb5;
+      font-size: 18px;
     }
 
-    .contenido-fragmento .tiempo {
+    .informacion .tiempo {
       margin: 0 0 22px;
       color: #817764;
       font-size: 14px;
       letter-spacing: 1px;
     }
 
-    /* BOTÓN */
+
+    /* ==============================
+       BOTÓN ESCUCHAR
+    ============================== */
 
     .escuchar {
-      display: inline-block;
+      border: 1px solid #a98a4e;
 
-      border: 1px solid #9d8148;
       background: transparent;
 
-      color: #d7b86d;
+      color: #d8b96e;
 
       padding: 12px 28px;
 
       font-family: Georgia, "Times New Roman", serif;
+
       font-size: 16px;
 
       cursor: pointer;
 
       transition:
         background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
+        color 0.3s ease;
     }
 
-    .escuchar:hover {
-      background: #9d8148;
-      color: #090807;
-      border-color: #d7b86d;
-    }
-
+    .escuchar:hover,
     .escuchar.activo {
-      background: #9d8148;
-      color: #090807;
+      background: #a98a4e;
+      color: #090806;
     }
 
-    /* REPRODUCTOR DE AUDIO */
 
-    .reproductor {
-      width: 100%;
-      height: 1px;
-      overflow: hidden;
-      opacity: 0;
+    /* ==============================
+       FLECHAS
+    ============================== */
+
+    .flecha {
       position: absolute;
-      left: -9999px;
-      top: -9999px;
+
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 52px;
+      height: 52px;
+
+      border-radius: 50%;
+
+      border: 1px solid #a98a4e;
+
+      background: rgba(8,7,5,0.78);
+
+      color: #d8b96e;
+
+      font-size: 28px;
+
+      cursor: pointer;
+
+      z-index: 10;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
     }
 
-    /* MÚSICA AMBIENTAL */
+    .flecha:hover {
+      background: #a98a4e;
+      color: #080706;
+    }
+
+    .flecha.izquierda {
+      left: 18px;
+    }
+
+    .flecha.derecha {
+      right: 18px;
+    }
+
+
+    /* ==============================
+       PUNTOS
+    ============================== */
+
+    .puntos {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+
+      padding: 20px 10px 25px;
+    }
+
+    .punto {
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      border: 1px solid #9d8148;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      padding: 0;
+    }
+
+    .punto.activo {
+      background: #d8b96e;
+    }
+
+
+    /* ==============================
+       REPRODUCTORES OCULTOS
+    ============================== */
+
+    .reproductor-oculto {
+      position: fixed;
+
+      width: 1px;
+      height: 1px;
+
+      left: -100px;
+      top: -100px;
+
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+
+    /* ==============================
+       BOTÓN MÚSICA
+    ============================== */
 
     .boton-musica {
       position: fixed;
@@ -270,100 +360,73 @@
 
       border: 1px solid #b79858;
 
-      background: rgba(17,14,10,0.94);
+      background: rgba(15,12,9,0.95);
 
-      color: #d7b86d;
+      color: #d8b96e;
 
       font-size: 22px;
 
       cursor: pointer;
 
       z-index: 1000;
-
-      box-shadow: 0 5px 20px rgba(0,0,0,0.65);
     }
 
     .boton-musica:hover {
-      border-color: #e0c47e;
-      background: #211a10;
+      background: #251d11;
     }
 
-    .aviso-musica {
-      position: fixed;
 
-      right: 85px;
-      bottom: 28px;
-
-      background: rgba(15,12,9,0.95);
-
-      border: 1px solid #514329;
-
-      color: #aaa08e;
-
-      padding: 9px 14px;
-
-      font-size: 12px;
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition: opacity 0.4s ease;
-
-      z-index: 999;
-    }
-
-    .aviso-musica.mostrar {
-      opacity: 1;
-    }
-
-    /* PIE */
+    /* ==============================
+       PIE
+    ============================== */
 
     footer {
       border-top: 1px solid #332a1c;
+
       text-align: center;
+
       padding: 35px 20px 50px;
 
       color: #756b5a;
+
       font-size: 14px;
     }
 
-    /* MÓVIL */
+
+    /* ==============================
+       MÓVIL
+    ============================== */
 
     @media (max-width: 700px) {
 
       header {
-        min-height: 42vh;
-        padding: 55px 18px;
+        padding: 45px 18px 30px;
       }
 
-      .foto {
-        height: 360px;
+      header h2 {
+        font-size: 20px;
       }
 
-      .fragmento {
-        padding: 8px;
+      .imagen-carrusel {
+        height: 55vh;
       }
 
-      .contenido-fragmento {
-        padding: 25px 12px 28px;
+      .flecha {
+        width: 44px;
+        height: 44px;
+        font-size: 23px;
       }
 
-      .contenido-fragmento h3 {
-        font-size: 25px;
+      .flecha.izquierda {
+        left: 10px;
       }
 
-      .contenido-fragmento .dedicado {
-        font-size: 18px;
+      .flecha.derecha {
+        right: 10px;
       }
 
-      .boton-musica {
-        right: 16px;
-        bottom: 16px;
-      }
-
-      .aviso-musica {
-        display: none;
+      .informacion h3 {
+        font-size: 26px;
       }
 
     }
@@ -376,34 +439,34 @@
 <body>
 
 
-  <!-- CABECERA -->
+  <!-- ==============================
+       CABECERA
+  ============================== -->
 
   <header>
 
-    <div class="cabecera-contenido">
-
-      <div class="sala">
-        SALA I
-      </div>
-
-      <h1>Maure</h1>
-
-      <h2>Las voces de un pregón</h2>
-
-      <div class="linea"></div>
-
-      <p>
-        Seis fragmentos de su pregón,
-        seis hermandades y seis momentos
-        de la Semana Santa de Jerez.
-      </p>
-
+    <div class="sala-numero">
+      SALA I
     </div>
+
+    <h1>Maure</h1>
+
+    <h2>Las voces de un pregón</h2>
+
+    <div class="linea"></div>
+
+    <p>
+      Seis fragmentos de su pregón,
+      seis hermandades y seis momentos
+      de la Semana Santa de Jerez.
+    </p>
 
   </header>
 
 
-  <!-- VOLVER -->
+  <!-- ==============================
+       VOLVER
+  ============================== -->
 
   <div class="volver">
 
@@ -414,671 +477,130 @@
   </div>
 
 
-  <!-- INTRODUCCIÓN -->
+  <!-- ==============================
+       INTRODUCCIÓN
+  ============================== -->
 
   <section class="intro">
 
-    <h3>Un pregón a través de sus hermandades</h3>
-
     <p>
-      Cada fragmento nos acerca a una hermandad distinta.
-      La palabra de Maure se encuentra aquí con las imágenes
-      de aquellas cofradías a las que dedicó su voz.
+      La palabra de Maure recorre diferentes hermandades
+      de Jerez. Cada imagen acompaña uno de los fragmentos
+      seleccionados de su pregón.
     </p>
 
   </section>
 
 
-  <!-- FRAGMENTOS -->
+  <!-- ==============================
+       CARRUSEL
+  ============================== -->
 
-  <main class="fragmentos">
-
-
-    <!-- FRAGMENTO I -->
-
-    <article class="fragmento">
-
-      <div class="foto">
-
-        <img
-          src="https://static.grupojoly.com/clip/aadb22a6-ba2a-40fa-ad4b-e25e8239de8e_source-aspect-ratio_1600w_0.webp"
-          alt="Hermandad de las Tres Caídas">
-
-      </div>
-
-      <div class="contenido-fragmento">
-
-        <span class="numero">
-          FRAGMENTO I
-        </span>
-
-        <h3>Las Tres Caídas</h3>
-
-        <p class="dedicado">
-          Maure
-        </p>
-
-        <p class="tiempo">
-          00:40 — 00:43
-        </p>
-
-        <button
-          class="escuchar"
-          onclick="reproducirFragmento(40,43,this)">
-          ▶ Escuchar fragmento
-        </button>
-
-      </div>
-
-    </article>
+  <section class="carrusel">
 
 
-    <!-- FRAGMENTO II -->
+    <!-- IMAGEN -->
 
-    <article class="fragmento">
+    <div class="imagen-carrusel">
 
-      <div class="foto">
+      <img
+        id="imagenSala"
+        src="https://static.grupojoly.com/clip/aadb22a6-ba2a-40fa-ad4b-e25e8239de8e_source-aspect-ratio_1600w_0.webp"
+        alt="Las Tres Caídas">
 
-        <img
-          src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Judios-San-Mateo_Jerez2016_P1010706.JPG/960px-Judios-San-Mateo_Jerez2016_P1010706.JPG?utm_source=es.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
-          alt="Judíos de San Mateo">
+    </div>
 
-      </div>
 
-      <div class="contenido-fragmento">
+    <!-- FLECHA IZQUIERDA -->
 
-        <span class="numero">
-          FRAGMENTO II
-        </span>
+    <button
+      class="flecha izquierda"
+      onclick="anterior()"
+      aria-label="Fragmento anterior">
 
-        <h3>Judíos de San Mateo</h3>
+      ‹
 
-        <p class="dedicado">
-          Maure
-        </p>
+    </button>
 
-        <p class="tiempo">
-          01:04 — 01:07:30
-        </p>
 
-        <button
-          class="escuchar"
-          onclick="reproducirFragmento(64,67.5,this)">
-          ▶ Escuchar fragmento
-        </button>
+    <!-- FLECHA DERECHA -->
+
+    <button
+      class="flecha derecha"
+      onclick="siguiente()"
+      aria-label="Fragmento siguiente">
+
+      ›
+
+    </button>
+
+
+    <!-- INFORMACIÓN -->
+
+    <div class="informacion">
+
+      <div
+        id="numeroFragmento"
+        class="fragmento-numero">
+
+        FRAGMENTO I
 
       </div>
 
-    </article>
+
+      <h3 id="nombreHermandad">
+        Las Tres Caídas
+      </h3>
 
 
-    <!-- FRAGMENTO III -->
-
-    <article class="fragmento">
-
-      <div class="foto">
-
-        <img
-          src="https://www.uniondehermandades.com/wp-content/uploads/2018/10/ANGUSTIAS2.jpg"
-          alt="Hermandad de las Angustias">
-
-      </div>
-
-      <div class="contenido-fragmento">
-
-        <span class="numero">
-          FRAGMENTO III
-        </span>
-
-        <h3>Las Angustias</h3>
-
-        <p class="dedicado">
-          Maure
-        </p>
-
-        <p class="tiempo">
-          01:17 — 01:21:38
-        </p>
-
-        <button
-          class="escuchar"
-          onclick="reproducirFragmento(77,81.633,this)">
-          ▶ Escuchar fragmento
-        </button>
-
-      </div>
-
-    </article>
+      <p class="pregonero">
+        Maure · Pregón
+      </p>
 
 
-    <!-- FRAGMENTO IV -->
+      <p
+        id="tiempoFragmento"
+        class="tiempo">
 
-    <article class="fragmento">
+        00:40 — 00:43
 
-      <div class="foto">
-
-        <img
-          src="https://static.grupojoly.com/clip/94c6ed92-5ded-42a4-9dcb-464df155a1ed_16-9-aspect-ratio_1600w_0.webp"
-          alt="Hermandad de las Tres Caídas">
-
-      </div>
-
-      <div class="contenido-fragmento">
-
-        <span class="numero">
-          FRAGMENTO IV
-        </span>
-
-        <h3>Las Tres Caídas</h3>
-
-        <p class="dedicado">
-          Maure
-        </p>
-
-        <p class="tiempo">
-          01:29 — 01:32:18
-        </p>
-
-        <button
-          class="escuchar"
-          onclick="reproducirFragmento(89,92.3,this)">
-          ▶ Escuchar fragmento
-        </button>
-
-      </div>
-
-    </article>
+      </p>
 
 
-    <!-- FRAGMENTO V -->
+      <button
+        id="botonEscuchar"
+        class="escuchar"
+        onclick="escucharFragmento()">
 
-    <article class="fragmento">
+        ▶ Escuchar fragmento
 
-      <div class="foto">
+      </button>
 
-        <img
-          src="https://static.grupojoly.com/clip/a4d8d001-471c-48f3-a666-99b932cccb9c_16-9-aspect-ratio_1600w_0.webp"
-          alt="Virgen de la Esperanza de la Yedra">
-
-      </div>
-
-      <div class="contenido-fragmento">
-
-        <span class="numero">
-          FRAGMENTO V
-        </span>
-
-        <h3>Virgen de la Esperanza de la Yedra</h3>
-
-        <p class="dedicado">
-          Maure
-        </p>
-
-        <p class="tiempo">
-          01:42 — 01:47:48
-        </p>
-
-        <button
-          class="escuchar"
-          onclick="reproducirFragmento(102,107.8,this)">
-          ▶ Escuchar fragmento
-        </button>
-
-      </div>
-
-    </article>
+    </div>
 
 
-    <!-- FRAGMENTO VI -->
+    <!-- PUNTOS -->
 
-    <article class="fragmento">
+    <div
+      id="puntos"
+      class="puntos">
 
-      <div class="foto">
-
-        <img
-          src="https://www.mundocofrade.es/asset/thumbnail,992,744,center,center/media/mundocofrade/images/2026/06/19/2026061909223555444.jpg"
-          alt="Virgen de los Dolores">
-
-      </div>
-
-      <div class="contenido-fragmento">
-
-        <span class="numero">
-          FRAGMENTO VI
-        </span>
-
-        <h3>Virgen de los Dolores</h3>
-
-        <p class="dedicado">
-          Maure
-        </p>
-
-        <p class="tiempo">
-          02:22:14 — 02:26:58
-        </p>
-
-        <button
-          class="escuchar"
-          onclick="reproducirFragmento(8054,8218,this)">
-          ▶ Escuchar fragmento
-        </button>
-
-      </div>
-
-    </article>
+    </div>
 
 
-  </main>
+  </section>
 
 
-  <!-- REPRODUCTOR DEL PREGÓN -->
+  <!-- ==============================
+       REPRODUCTOR PREGÓN
+  ============================== -->
 
-  <div class="reproductor">
+  <div class="reproductor-oculto">
 
-    <div id="pregónPlayer"></div>
+    <div id="pregonPlayer"></div>
 
   </div>
 
 
-  <!-- REPRODUCTOR DE LA MARCHA -->
-
-  <div class="reproductor">
-
-    <div id="musicaPlayer"></div>
-
-  </div>
-
-
-  <!-- BOTÓN MÚSICA -->
-
-  <div
-    id="avisoMusica"
-    class="aviso-musica">
-    Música ambiental
-  </div>
-
-  <button
-    id="botonMusica"
-    class="boton-musica"
-    onclick="alternarMusica()"
-    title="Música ambiental">
-
-    ♪
-
-  </button>
-
-
-  <!-- PIE -->
-
-  <footer>
-
-    Museo de los Pregoneros · Sala I · Maure
-
-  </footer>
-
-
-  <script>
-
-    /*
-      ==========================================================
-      CONFIGURACIÓN
-      ==========================================================
-    */
-
-    const VIDEO_PREGON = "Q2vFuXOILCM";
-
-    const VIDEO_MARCHA = "JbE0dBSUGkk";
-
-
-    /*
-      ==========================================================
-      VARIABLES
-      ==========================================================
-    */
-
-    let playerPregon;
-    let playerMusica;
-
-    let fragmentoActivo = null;
-
-    let temporizador = null;
-
-    let musicaEncendida = false;
-
-
-    /*
-      ==========================================================
-      CARGAR API DE YOUTUBE
-      ==========================================================
-    */
-
-    function onYouTubeIframeAPIReady() {
-
-      playerPregon = new YT.Player(
-        "pregónPlayer",
-        {
-
-          videoId: VIDEO_PREGON,
-
-          playerVars: {
-            autoplay: 0,
-            controls: 0,
-            rel: 0,
-            modestbranding: 1,
-            playsinline: 1
-          },
-
-          events: {
-
-            onStateChange: controlarEstadoPregon
-
-          }
-
-        }
-      );
-
-
-      playerMusica = new YT.Player(
-        "musicaPlayer",
-        {
-
-          videoId: VIDEO_MARCHA,
-
-          playerVars: {
-            autoplay: 0,
-            controls: 0,
-            loop: 1,
-            playlist: VIDEO_MARCHA,
-            rel: 0,
-            modestbranding: 1,
-            playsinline: 1
-          }
-
-        }
-      );
-
-    }
-
-
-    /*
-      ==========================================================
-      REPRODUCIR FRAGMENTO
-      ==========================================================
-    */
-
-    function reproducirFragmento(inicio, final, boton) {
-
-      if (!playerPregon) {
-        return;
-      }
-
-
-      /*
-        Si pulsamos el mismo fragmento que está sonando,
-        lo detenemos.
-      */
-
-      if (fragmentoActivo === boton) {
-
-        playerPregon.pauseVideo();
-
-        boton.classList.remove("activo");
-
-        boton.innerHTML = "▶ Escuchar fragmento";
-
-        fragmentoActivo = null;
-
-        detenerTemporizador();
-
-        return;
-
-      }
-
-
-      /*
-        Quitamos el estado activo de todos los botones.
-      */
-
-      document.querySelectorAll(".escuchar").forEach(
-        function(b) {
-
-          b.classList.remove("activo");
-
-          b.innerHTML = "▶ Escuchar fragmento";
-
-        }
-      );
-
-
-      /*
-        Detenemos el fragmento anterior.
-      */
-
-      detenerTemporizador();
-
-
-      /*
-        Reproducimos desde el segundo exacto.
-      */
-
-      playerPregon.seekTo(inicio, true);
-
-      playerPregon.playVideo();
-
-
-      /*
-        Guardamos qué botón está activo.
-      */
-
-      fragmentoActivo = boton;
-
-      boton.classList.add("activo");
-
-      boton.innerHTML = "❚❚ Detener fragmento";
-
-
-      /*
-        Iniciamos la marcha de fondo.
-      */
-
-      iniciarMusica();
-
-
-      /*
-        Comprobamos cuándo debe terminar el fragmento.
-      */
-
-      temporizador = setInterval(
-        function() {
-
-          if (
-            playerPregon &&
-            playerPregon.getCurrentTime &&
-            playerPregon.getPlayerState() === YT.PlayerState.PLAYING
-          ) {
-
-            const tiempoActual =
-              playerPregon.getCurrentTime();
-
-
-            if (tiempoActual >= final) {
-
-              playerPregon.pauseVideo();
-
-              boton.classList.remove("activo");
-
-              boton.innerHTML =
-                "▶ Escuchar fragmento";
-
-              fragmentoActivo = null;
-
-              detenerTemporizador();
-
-            }
-
-          }
-
-        },
-        200
-      );
-
-    }
-
-
-    /*
-      ==========================================================
-      CONTROL DEL ESTADO DEL PREGÓN
-      ==========================================================
-    */
-
-    function controlarEstadoPregon(event) {
-
-      if (
-        event.data === YT.PlayerState.ENDED ||
-        event.data === YT.PlayerState.PAUSED
-      ) {
-
-        if (fragmentoActivo) {
-
-          fragmentoActivo.classList.remove("activo");
-
-          fragmentoActivo.innerHTML =
-            "▶ Escuchar fragmento";
-
-          fragmentoActivo = null;
-
-        }
-
-        detenerTemporizador();
-
-      }
-
-    }
-
-
-    /*
-      ==========================================================
-      TEMPORIZADOR
-      ==========================================================
-    */
-
-    function detenerTemporizador() {
-
-      if (temporizador) {
-
-        clearInterval(temporizador);
-
-        temporizador = null;
-
-      }
-
-    }
-
-
-    /*
-      ==========================================================
-      MÚSICA DE FONDO
-      ==========================================================
-    */
-
-    function iniciarMusica() {
-
-      if (!playerMusica) {
-        return;
-      }
-
-
-      if (!musicaEncendida) {
-
-        playerMusica.setVolume(12);
-
-        playerMusica.playVideo();
-
-        musicaEncendida = true;
-
-        document.getElementById("botonMusica").innerHTML = "♫";
-
-        mostrarAviso();
-
-      }
-
-    }
-
-
-    /*
-      ==========================================================
-      ENCENDER / APAGAR MÚSICA
-      ==========================================================
-    */
-
-    function alternarMusica() {
-
-      if (!playerMusica) {
-        return;
-      }
-
-
-      if (musicaEncendida) {
-
-        playerMusica.pauseVideo();
-
-        musicaEncendida = false;
-
-        document.getElementById("botonMusica").innerHTML = "♪";
-
-        mostrarAviso();
-
-      } else {
-
-        playerMusica.setVolume(12);
-
-        playerMusica.playVideo();
-
-        musicaEncendida = true;
-
-        document.getElementById("botonMusica").innerHTML = "♫";
-
-        mostrarAviso();
-
-      }
-
-    }
-
-
-    /*
-      ==========================================================
-      AVISO DE MÚSICA
-      ==========================================================
-    */
-
-    function mostrarAviso() {
-
-      const aviso =
-        document.getElementById("avisoMusica");
-
-      aviso.classList.add("mostrar");
-
-      setTimeout(
-        function() {
-
-          aviso.classList.remove("mostrar");
-
-        },
-        1800
-      );
-
-    }
-
-
-  </script>
-
-
-  <!-- API DE YOUTUBE -->
-
-  <script src="https://www.youtube.com/iframe_api"></script>
-
-
-</body>
-
-</html>
+  <!--
 
