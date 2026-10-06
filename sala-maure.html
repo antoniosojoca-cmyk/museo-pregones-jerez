@@ -1,579 +1,524 @@
-
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sala I — Maure | Museo de los Pregoneros</title>
+<title>Sala I — Maure</title>
 
 <style>
-
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  background: #050505;
-  color: white;
-  font-family: Georgia, "Times New Roman", serif;
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  background:#050505;
+  color:#fff;
+  font-family:Georgia,"Times New Roman",serif;
+  overflow:hidden;
+}
+
+/* FONDO */
+body{
+  background:
+    radial-gradient(circle at center, #191919 0%, #080808 55%, #020202 100%);
 }
 
 /* CABECERA */
-
-header {
-  text-align: center;
-  padding: 28px 20px 18px;
-  background: linear-gradient(to bottom, #151515, #050505);
-}
-
-header h1 {
-  margin: 0;
-  color: #d4af37;
-  font-size: 34px;
-  letter-spacing: 2px;
-}
-
-header p {
-  margin: 8px 0 0;
-  color: #bbb;
-  font-size: 17px;
-}
-
-/* CARRUSEL */
-
-.carousel {
-  position: relative;
-  width: 94%;
-  max-width: 1250px;
-  height: 68vh;
-  min-height: 430px;
-  margin: 20px auto 0;
-  background: #000;
-  border: 1px solid #3b321b;
-  box-shadow: 0 0 35px rgba(0,0,0,.8);
-  overflow: hidden;
-}
-
-.slide {
-  display: none;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-}
-
-.slide.active {
-  display: flex;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #000;
-}
-
-/* TEXTO */
-
-.caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 55px 25px 22px;
-  text-align: center;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,.96),
-    rgba(0,0,0,.65),
+header{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:20;
+  padding:22px 30px 15px;
+  text-align:center;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.88),
+    rgba(0,0,0,.35),
     transparent
   );
 }
 
-.caption h2 {
-  margin: 0 0 7px;
-  color: #d4af37;
-  font-size: 27px;
+header h1{
+  margin:0;
+  color:#d4af37;
+  font-size:clamp(24px,3vw,42px);
+  font-weight:normal;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  text-shadow:0 2px 8px #000;
 }
 
-.caption p {
-  margin: 0;
-  color: #eee;
-  font-size: 16px;
+header p{
+  margin:7px 0 0;
+  color:#d8d0bd;
+  font-size:clamp(12px,1.3vw,16px);
+  letter-spacing:2px;
+}
+
+/* CARRUSEL */
+.carousel{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 1.2s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.slide.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* IMAGEN */
+.image-frame{
+  position:relative;
+  width:92vw;
+  height:78vh;
+  margin-top:35px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.35);
+  box-shadow:
+    0 0 35px rgba(0,0,0,.95),
+    0 0 80px rgba(0,0,0,.75);
+  background:#000;
+}
+
+.image-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.05),
+      transparent 60%,
+      rgba(0,0,0,.45)
+    );
+  pointer-events:none;
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+/* INFORMACIÓN DISCRETA */
+.caption{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:5;
+  padding:55px 35px 25px;
+  text-align:center;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.9),
+    rgba(0,0,0,.45),
+    transparent
+  );
+}
+
+.caption .number{
+  color:#d4af37;
+  font-size:13px;
+  letter-spacing:4px;
+  margin-bottom:6px;
+}
+
+.caption h2{
+  margin:0;
+  font-size:clamp(22px,2.5vw,36px);
+  font-weight:normal;
+  text-shadow:0 2px 8px #000;
+}
+
+.caption p{
+  margin:7px 0 0;
+  color:#d8d0bd;
+  font-size:clamp(13px,1.2vw,16px);
+  font-style:italic;
 }
 
 /* FLECHAS */
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid #d4af37;
-  background: rgba(0,0,0,.7);
-  color: #d4af37;
-  font-size: 30px;
-  cursor: pointer;
-  z-index: 10;
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:15;
+  width:48px;
+  height:70px;
+  border:0;
+  background:rgba(0,0,0,.38);
+  color:#d4af37;
+  font-size:42px;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.arrow:hover {
-  background: #d4af37;
-  color: #000;
+.arrow:hover{
+  background:rgba(212,175,55,.15);
+  color:#fff;
 }
 
-.prev {
-  left: 15px;
+.arrow.left{
+  left:12px;
 }
 
-.next {
-  right: 15px;
+.arrow.right{
+  right:12px;
 }
 
 /* PUNTOS */
-
-.dots {
-  text-align: center;
-  padding: 16px 0 8px;
+.dots{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+  display:flex;
+  gap:9px;
 }
 
-.dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  border-radius: 50%;
-  background: #555;
-  cursor: pointer;
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  border:1px solid #d4af37;
+  background:transparent;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.dot.active {
-  background: #d4af37;
-  box-shadow: 0 0 8px #d4af37;
+.dot.active{
+  background:#d4af37;
+  box-shadow:0 0 8px rgba(212,175,55,.7);
 }
 
-/* BOTÓN */
-
-.controls {
-  text-align: center;
-  margin: 18px 0 8px;
+/* BOTÓN MÚSICA */
+.music-button{
+  position:absolute;
+  right:20px;
+  top:20px;
+  z-index:30;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(212,175,55,.65);
+  background:rgba(0,0,0,.55);
+  color:#d4af37;
+  cursor:pointer;
+  font-size:17px;
+  transition:.3s;
 }
 
-.action {
-  padding: 12px 24px;
-  border: 1px solid #d4af37;
-  border-radius: 4px;
-  background: #0b0b0b;
-  color: #d4af37;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  cursor: pointer;
+.music-button:hover{
+  background:rgba(212,175,55,.15);
+  color:#fff;
 }
 
-.action:hover {
-  background: #d4af37;
-  color: #000;
+/* YOUTUBE OCULTO */
+.youtube-box{
+  position:absolute;
+  width:1px;
+  height:1px;
+  left:-9999px;
+  top:-9999px;
+  opacity:0;
+  pointer-events:none;
 }
 
-/* ESTADO */
+/* RESPONSIVE */
+@media(max-width:700px){
 
-#estado {
-  text-align: center;
-  color: #aaa;
-  font-size: 14px;
-  margin: 7px 20px 25px;
-}
-
-/* BOTÓN MARCHA */
-
-.music-button {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid #d4af37;
-  background: rgba(0,0,0,.88);
-  color: #d4af37;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 100;
-}
-
-.music-button:hover {
-  background: #d4af37;
-  color: #000;
-}
-
-/* REPRODUCTORES OCULTOS */
-
-#pregonPlayer,
-#marchPlayer {
-  position: fixed;
-  left: -1000px;
-  top: -1000px;
-  width: 2px;
-  height: 2px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* VOLVER */
-
-.back {
-  text-align: center;
-  padding: 10px 20px 35px;
-}
-
-.back a {
-  color: #d4af37;
-  text-decoration: none;
-  border-bottom: 1px solid #d4af37;
-  padding-bottom: 3px;
-}
-
-.back a:hover {
-  color: white;
-  border-color: white;
-}
-
-/* MÓVIL */
-
-@media (max-width: 700px) {
-
-  header h1 {
-    font-size: 26px;
+  header{
+    padding:16px 50px 12px 15px;
   }
 
-  header p {
-    font-size: 15px;
+  header h1{
+    font-size:22px;
+    letter-spacing:2px;
   }
 
-  .carousel {
-    height: 60vh;
-    min-height: 360px;
+  header p{
+    font-size:11px;
+    letter-spacing:1px;
   }
 
-  .caption h2 {
-    font-size: 21px;
+  .image-frame{
+    width:100%;
+    height:72vh;
+    border-left:0;
+    border-right:0;
   }
 
-  .caption p {
-    font-size: 14px;
+  .arrow{
+    width:38px;
+    height:55px;
+    font-size:30px;
   }
 
-  .arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
+  .arrow.left{
+    left:4px;
   }
 
+  .arrow.right{
+    right:4px;
+  }
+
+  .caption{
+    padding:45px 15px 22px;
+  }
+
+  .caption h2{
+    font-size:22px;
+  }
+
+  .caption p{
+    font-size:13px;
+  }
 }
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
   <h1>Sala I — Maure</h1>
-
-  <p>
-    Seis momentos de un pregón dedicado a la Semana Santa de Jerez
-  </p>
-
+  <p>Seis momentos de un pregón · Seis miradas de la Semana Santa de Jerez</p>
 </header>
 
 <div class="carousel">
 
-  <!-- I -->
-
+  <!-- 1 -->
   <div class="slide active">
-
-```
-<img src="https://static.grupojoly.com/clip/aadb22a6-ba2a-40fa-ad4b-e25e8239de8e_source-aspect-ratio_1600w_0.webp">
-
-<div class="caption">
-
-  <h2>Tres Caídas</h2>
-
-  <p>
-    Fragmento I · 00:40 — 00:43
-  </p>
-
-</div>
-```
-
+    <div class="image-frame">
+      <img
+        src="https://i.pinimg.com/736x/68/7a/14/687a14e21740c29b63902c544dfb8555.jpg"
+        alt="Nuestro Padre Jesús de la Salud en sus Tres Caídas">
+      <div class="caption">
+        <div class="number">I · TRES CAÍDAS</div>
+        <h2>Nuestro Padre Jesús de la Salud en sus Tres Caídas</h2>
+        <p>Primer momento del pregón</p>
+      </div>
+    </div>
   </div>
 
-  <!-- II -->
-
+  <!-- 2 -->
   <div class="slide">
-
-```
-<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Judios-San-Mateo_Jerez2016_P1010706.JPG/960px-Judios-San-Mateo_Jerez2016_P1010706.JPG?utm_source=es.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail">
-
-<div class="caption">
-
-  <h2>Judíos de San Mateo</h2>
-
-  <p>
-    Fragmento II · 01:04 — 01:07:30
-  </p>
-
-</div>
-```
-
+    <div class="image-frame">
+      <img
+        src="https://static.grupojoly.com/clip/a04eb502-72d5-4dac-a021-cf5679bee53e_16-9-aspect-ratio_1600w_0.webp"
+        alt="Nuestro Padre y Señor de las Penas">
+      <div class="caption">
+        <div class="number">II · LOS JUDÍOS DE SAN MATEO</div>
+        <h2>Nuestro Padre y Señor de las Penas</h2>
+        <p>Segundo momento del pregón</p>
+      </div>
+    </div>
   </div>
 
-  <!-- III -->
-
+  <!-- 3 -->
   <div class="slide">
-
-```
-<img src="https://www.uniondehermandades.com/wp-content/uploads/2018/10/ANGUSTIAS2.jpg">
-
-<div class="caption">
-
-  <h2>Angustias</h2>
-
-  <p>
-    Fragmento III · 01:17 — 01:21:38
-  </p>
-
-</div>
-```
-
+    <div class="image-frame">
+      <div class="image-frame">
+        <img
+          src="https://www.uniondehermandades.com/wp-content/uploads/2018/10/ANGUSTIAS2.jpg"
+          alt="Nuestra Señora de las Angustias">
+        <div class="caption">
+          <div class="number">III · LAS ANGUSTIAS</div>
+          <h2>Nuestra Señora de las Angustias</h2>
+          <p>Tercer momento del pregón</p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- IV -->
-
+  <!-- 4 -->
   <div class="slide">
-
-```
-<img src="https://static.grupojoly.com/clip/94c6ed92-5ded-42a4-9dcb-464df155a1ed_16-9-aspect-ratio_1600w_0.webp">
-
-<div class="caption">
-
-  <h2>Tres Caídas</h2>
-
-  <p>
-    Fragmento IV · 01:29 — 01:32:18
-  </p>
-
-</div>
-```
-
+    <div class="image-frame">
+      <img
+        src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Cristo_del_amor_-_Jerez_DSC06375.JPG/960px-Cristo_del_amor_-_Jerez_DSC06375.JPG?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+        alt="Santísimo Cristo del Amor">
+      <div class="caption">
+        <div class="number">IV · CRISTO DEL AMOR</div>
+        <h2>Santísimo Cristo del Amor</h2>
+        <p>Cuarto momento del pregón</p>
+      </div>
+    </div>
   </div>
 
-  <!-- V -->
-
+  <!-- 5 -->
   <div class="slide">
-
-```
-<img src="https://static.grupojoly.com/clip/a4d8d001-471c-48f3-a666-99b932cccb9c_16-9-aspect-ratio_1600w_0.webp">
-
-<div class="caption">
-
-  <h2>Virgen de la Esperanza de la Yedra</h2>
-
-  <p>
-    Fragmento V · 01:42 — 01:47:48
-  </p>
-
-</div>
-```
-
+    <div class="image-frame">
+      <img
+        src="https://islapasion.net/wp-content/uploads/old_web_images/22092014193419000000-909x682.jpg"
+        alt="Esperanza de la Yedra">
+      <div class="caption">
+        <div class="number">V · LA YEDRA</div>
+        <h2>Nuestra Señora de la Esperanza</h2>
+        <p>Quinto momento del pregón</p>
+      </div>
+    </div>
   </div>
 
-  <!-- VI -->
-
+  <!-- 6 -->
   <div class="slide">
-
-```
-<img src="https://www.mundocofrade.es/asset/thumbnail,992,744,center,center/media/mundocofrade/images/2026/06/19/2026061909223555444.jpg">
-
-<div class="caption">
-
-  <h2>Virgen de los Dolores</h2>
-
-  <p>
-    Fragmento VI · 02:22:14 — 02:26:58
-  </p>
-
-</div>
-```
-
+    <div class="image-frame">
+      <img
+        src="https://i0.wp.com/cofradiadedoloresjerez.es/wp-content/uploads/2023/02/IMG_5455-scaled.jpg?ssl=1&fit=1766%2C1672"
+        alt="María Santísima de los Dolores">
+      <div class="caption">
+        <div class="number">VI · LOS DOLORES</div>
+        <h2>María Santísima de los Dolores</h2>
+        <p>Sexto momento del pregón</p>
+      </div>
+    </div>
   </div>
 
-<button class="arrow prev" onclick="anterior()">‹</button>
+  <!-- FLECHAS -->
+  <button class="arrow left" onclick="previousSlide()" aria-label="Anterior">‹</button>
+  <button class="arrow right" onclick="nextSlide()" aria-label="Siguiente">›</button>
 
-<button class="arrow next" onclick="siguiente()">›</button>
-
-</div>
-
-<div class="dots">
-
-<span class="dot active" onclick="irA(0)"></span>
-
-<span class="dot" onclick="irA(1)"></span>
-
-<span class="dot" onclick="irA(2)"></span>
-
-<span class="dot" onclick="irA(3)"></span>
-
-<span class="dot" onclick="irA(4)"></span>
-
-<span class="dot" onclick="irA(5)"></span>
+  <!-- PUNTOS -->
+  <div class="dots">
+    <button class="dot active" onclick="goToSlide(0)"></button>
+    <button class="dot" onclick="goToSlide(1)"></button>
+    <button class="dot" onclick="goToSlide(2)"></button>
+    <button class="dot" onclick="goToSlide(3)"></button>
+    <button class="dot" onclick="goToSlide(4)"></button>
+    <button class="dot" onclick="goToSlide(5)"></button>
+  </div>
 
 </div>
 
-<div class="controls">
-
-  <button class="action" onclick="escucharFragmento()">
-    ▶ Escuchar fragmento
-  </button>
-
+<!-- REPRODUCTOR DEL PREGÓN -->
+<div class="youtube-box">
+  <div id="pregónPlayer"></div>
 </div>
 
-<div id="estado">
-  Fragmento I · Pulsa «Escuchar fragmento»
+<!-- REPRODUCTOR DE LA MARCHA -->
+<div class="youtube-box">
+  <div id="musicPlayer"></div>
 </div>
 
-<div class="back">
-
-  <a href="index.html">
-    ← Volver al Museo de los Pregoneros
-  </a>
-
-</div>
-
-<!-- REPRODUCTORES -->
-
-<div id="pregonPlayer"></div>
-
-<div id="marchPlayer"></div>
-
-<!-- MÚSICA -->
-
-<button
-class="music-button"
-onclick="activarMarcha()"
-title="Música de fondo">
-♪ </button>
+<button class="music-button" onclick="toggleMusic()" title="Música de fondo">
+  ♪
+</button>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 
-/* =====================================
-   LOS SEIS FRAGMENTOS
-   ===================================== */
+/* =========================================================
+   DATOS DE LOS SEIS FRAGMENTOS
+   Los tiempos están expresados en segundos.
+   ========================================================= */
 
-const fragmentos = [
+const fragments = [
 
   {
-    nombre: "Fragmento I · Tres Caídas",
-    inicio: 2400,
-    fin: 2580
+    start: 2400,
+    end: 2580
   },
 
   {
-    nombre: "Fragmento II · Judíos de San Mateo",
-    inicio: 3840,
-    fin: 4050
+    start: 3840,
+    end: 4050
   },
 
   {
-    nombre: "Fragmento III · Angustias",
-    inicio: 4620,
-    fin: 4898
+    start: 4620,
+    end: 4898
   },
 
   {
-    nombre: "Fragmento IV · Tres Caídas",
-    inicio: 5340,
-    fin: 5538
+    start: 5340,
+    end: 5538
   },
 
   {
-    nombre: "Fragmento V · Virgen de la Esperanza de la Yedra",
-    inicio: 6120,
-    fin: 6468
+    start: 6120,
+    end: 6468
   },
 
   {
-    nombre: "Fragmento VI · Virgen de los Dolores",
-    inicio: 8534,
-    fin: 8818
+    start: 8534,
+    end: 8818
   }
 
 ];
 
+/* =========================================================
+   VARIABLES
+   ========================================================= */
 
-/* =====================================
-   VÍDEOS
-   ===================================== */
+let slides = document.querySelectorAll(".slide");
+let dots = document.querySelectorAll(".dot");
 
-const VIDEO_PREGON = "Q2vFuXOILCM";
+let currentSlide = 0;
 
-const VIDEO_MARCHA = "JbE0dBSUGkk";
+let pregonPlayer;
+let musicPlayer;
 
+let musicPlaying = false;
 
-let pregonPlayer = null;
+let timer = null;
 
-let marchPlayer = null;
-
-let actual = 0;
-
-let temporizador = null;
-
-let marchaSonando = false;
-
-
-/* =====================================
+/* =========================================================
    YOUTUBE
-   ===================================== */
+   ========================================================= */
 
-function onYouTubeIframeAPIReady() {
+function onYouTubeIframeAPIReady(){
 
-  pregonPlayer = new YT.Player("pregonPlayer", {
+  pregonPlayer = new YT.Player("pregónPlayer",{
 
-    width: "2",
+    height:"1",
+    width:"1",
 
-    height: "2",
+    videoId:"Q2vFuXOILCM",
 
-    videoId: VIDEO_PREGON,
-
-    playerVars: {
-
-      autoplay: 0,
-
-      controls: 0,
-
-      rel: 0,
-
-      playsinline: 1,
-
-      modestbranding: 1
-
+    playerVars:{
+      autoplay:0,
+      controls:0,
+      rel:0,
+      modestbranding:1
     },
 
-    events: {
+    events:{
+      onReady:function(){
 
-      onReady: function() {
+        startFragment(0);
 
-        pregonPlayer.setVolume(100);
+      },
+
+      onStateChange:function(event){
+
+        if(event.data === YT.PlayerState.ENDED){
+
+          nextSlide();
+
+        }
 
       }
 
@@ -581,38 +526,26 @@ function onYouTubeIframeAPIReady() {
 
   });
 
+  musicPlayer = new YT.Player("musicPlayer",{
 
-  marchPlayer = new YT.Player("marchPlayer", {
+    height:"1",
+    width:"1",
 
-    width: "2",
+    videoId:"JbE0dBSUGkk",
 
-    height: "2",
-
-    videoId: VIDEO_MARCHA,
-
-    playerVars: {
-
-      autoplay: 0,
-
-      controls: 0,
-
-      loop: 1,
-
-      playlist: VIDEO_MARCHA,
-
-      rel: 0,
-
-      playsinline: 1,
-
-      modestbranding: 1
-
+    playerVars:{
+      autoplay:0,
+      controls:0,
+      loop:1,
+      playlist:"JbE0dBSUGkk",
+      rel:0,
+      modestbranding:1
     },
 
-    events: {
+    events:{
+      onReady:function(){
 
-      onReady: function() {
-
-        marchPlayer.setVolume(10);
+        musicPlayer.setVolume(8);
 
       }
 
@@ -622,270 +555,157 @@ function onYouTubeIframeAPIReady() {
 
 }
 
+/* =========================================================
+   INICIAR FRAGMENTO
+   ========================================================= */
 
-/* =====================================
-   MOSTRAR IMAGEN
-   ===================================== */
+function startFragment(index){
 
-function mostrar(numero) {
+  currentSlide = index;
 
-  const slides =
-    document.querySelectorAll(".slide");
+  showSlide(index);
 
-  const dots =
-    document.querySelectorAll(".dot");
+  if(!pregonPlayer) return;
 
+  const fragment = fragments[index];
 
-  slides.forEach(function(slide, i) {
-
-    slide.classList.toggle(
-      "active",
-      i === numero
-    );
-
-  });
-
-
-  dots.forEach(function(dot, i) {
-
-    dot.classList.toggle(
-      "active",
-      i === numero
-    );
-
-  });
-
-
-  actual = numero;
-
-
-  document.getElementById("estado").textContent =
-    fragmentos[actual].nombre +
-    " · Pulsa «Escuchar fragmento»";
-
-}
-
-
-/* =====================================
-   DETENER PREGÓN
-   ===================================== */
-
-function detenerPregon() {
-
-  if (temporizador) {
-
-    clearTimeout(temporizador);
-
-    temporizador = null;
-
-  }
-
-
-  if (
-    pregonPlayer &&
-    typeof pregonPlayer.stopVideo === "function"
-  ) {
-
-    pregonPlayer.stopVideo();
-
-  }
-
-}
-
-
-/* =====================================
-   ESCUCHAR FRAGMENTO
-   ===================================== */
-
-function escucharFragmento() {
-
-  if (!pregonPlayer) {
-
-    document.getElementById("estado").textContent =
-      "El reproductor se está preparando…";
-
-    return;
-
-  }
-
-
-  detenerPregon();
-
-
-  const f = fragmentos[actual];
-
-
-  document.getElementById("estado").textContent =
-    "▶ " + f.nombre;
-
-
-  /*
-     CARGAMOS EL VÍDEO DIRECTAMENTE
-     EN EL MINUTO CORRESPONDIENTE.
-  */
+  clearTimeout(timer);
 
   pregonPlayer.loadVideoById({
 
-    videoId: VIDEO_PREGON,
+    videoId:"Q2vFuXOILCM",
 
-    startSeconds: f.inicio,
-
-    endSeconds: f.fin
+    startSeconds:fragment.start
 
   });
 
+  timer = setTimeout(function(){
 
-  /*
-     Si el navegador permite el autoplay
-     después del clic, comenzará aquí.
-  */
+    nextSlide();
 
-  pregonPlayer.setVolume(100);
-
-  pregonPlayer.playVideo();
-
-
-  /*
-     Al terminar el tiempo del fragmento,
-     pasamos automáticamente al siguiente.
-  */
-
-  const duracion =
-    (f.fin - f.inicio) * 1000;
-
-
-  temporizador = setTimeout(function() {
-
-    detenerPregon();
-
-
-    actual++;
-
-    if (actual >= fragmentos.length) {
-
-      actual = 0;
-
-    }
-
-
-    mostrar(actual);
-
-
-    /*
-       El siguiente fragmento queda preparado
-       pero esperamos al clic para reproducirlo.
-    */
-
-  }, duracion + 1000);
+  },(fragment.end - fragment.start) * 1000);
 
 }
 
+/* =========================================================
+   MOSTRAR DIAPOSITIVA
+   ========================================================= */
 
-/* =====================================
+function showSlide(index){
+
+  slides.forEach(function(slide,i){
+
+    slide.classList.toggle("active",i === index);
+
+  });
+
+  dots.forEach(function(dot,i){
+
+    dot.classList.toggle("active",i === index);
+
+  });
+
+}
+
+/* =========================================================
    SIGUIENTE
-   ===================================== */
+   ========================================================= */
 
-function siguiente() {
+function nextSlide(){
 
-  detenerPregon();
+  clearTimeout(timer);
 
-  actual++;
+  let next = currentSlide + 1;
 
-  if (actual >= fragmentos.length) {
+  if(next >= slides.length){
 
-    actual = 0;
+    next = 0;
 
   }
 
-  mostrar(actual);
+  startFragment(next);
 
 }
 
-
-/* =====================================
+/* =========================================================
    ANTERIOR
-   ===================================== */
+   ========================================================= */
 
-function anterior() {
+function previousSlide(){
 
-  detenerPregon();
+  clearTimeout(timer);
 
-  actual--;
+  let previous = currentSlide - 1;
 
-  if (actual < 0) {
+  if(previous < 0){
 
-    actual = fragmentos.length - 1;
+    previous = slides.length - 1;
 
   }
 
-  mostrar(actual);
+  startFragment(previous);
 
 }
 
+/* =========================================================
+   IR A UNA DIAPOSITIVA
+   ========================================================= */
 
-/* =====================================
-   IR A FRAGMENTO
-   ===================================== */
+function goToSlide(index){
 
-function irA(numero) {
+  clearTimeout(timer);
 
-  detenerPregon();
-
-  mostrar(numero);
+  startFragment(index);
 
 }
 
+/* =========================================================
+   MÚSICA
+   ========================================================= */
 
-/* =====================================
-   MARCHA
-   ===================================== */
+function toggleMusic(){
 
-function activarMarcha() {
+  if(!musicPlayer) return;
 
-  if (!marchPlayer) {
-    return;
-  }
+  if(!musicPlaying){
 
+    musicPlayer.setVolume(8);
 
-  if (!marchaSonando) {
+    musicPlayer.playVideo();
 
-    marchPlayer.setVolume(10);
+    musicPlaying = true;
 
-    marchPlayer.playVideo();
+  }else{
 
-    marchaSonando = true;
+    musicPlayer.pauseVideo();
 
-  } else {
-
-    marchPlayer.pauseVideo();
-
-    marchaSonando = false;
+    musicPlaying = false;
 
   }
 
 }
 
+/* =========================================================
+   TECLADO
+   ========================================================= */
 
-/* =====================================
-   INICIO
-   ===================================== */
+document.addEventListener("keydown",function(event){
 
-mostrar(0);
+  if(event.key === "ArrowRight"){
+
+    nextSlide();
+
+  }
+
+  if(event.key === "ArrowLeft"){
+
+    previousSlide();
+
+  }
+
+});
 
 </script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
