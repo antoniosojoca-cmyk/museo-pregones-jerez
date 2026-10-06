@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,7 +23,6 @@ html,body{
   overflow:hidden;
 }
 
-/* FONDO */
 body{
   background:
     radial-gradient(circle at center, #191919 0%, #080808 55%, #020202 100%);
@@ -86,7 +86,7 @@ header p{
   visibility:visible;
 }
 
-/* IMAGEN */
+/* MARCO DE IMAGEN */
 .image-frame{
   position:relative;
   width:92vw;
@@ -122,7 +122,7 @@ header p{
   display:block;
 }
 
-/* INFORMACIÓN DISCRETA */
+/* TEXTO */
 .caption{
   position:absolute;
   left:0;
@@ -192,7 +192,7 @@ header p{
 /* PUNTOS */
 .dots{
   position:absolute;
-  bottom:18px;
+  bottom:52px;
   left:50%;
   transform:translateX(-50%);
   z-index:20;
@@ -235,6 +235,27 @@ header p{
 .music-button:hover{
   background:rgba(212,175,55,.15);
   color:#fff;
+}
+
+/* VOLVER A PORTADA */
+.back-home{
+  position:absolute;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  z-index:25;
+  color:#d4af37;
+  text-decoration:none;
+  font-size:14px;
+  letter-spacing:1.5px;
+  padding:5px 12px;
+  transition:.3s;
+  white-space:nowrap;
+}
+
+.back-home:hover{
+  color:#fff;
+  text-shadow:0 0 8px rgba(212,175,55,.7);
 }
 
 /* YOUTUBE OCULTO */
@@ -297,6 +318,11 @@ header p{
   .caption p{
     font-size:13px;
   }
+
+  .back-home{
+    font-size:12px;
+    bottom:12px;
+  }
 }
 </style>
 </head>
@@ -310,15 +336,15 @@ header p{
 
 <div class="carousel">
 
-  <!-- 1 -->
+  <!-- 1 · RONDA DE LOS CASINOS -->
   <div class="slide active">
     <div class="image-frame">
       <img
         src="https://i.pinimg.com/736x/68/7a/14/687a14e21740c29b63902c544dfb8555.jpg"
-        alt="Nuestro Padre Jesús de la Salud en sus Tres Caídas">
+        alt="Ronda de los Casinos">
       <div class="caption">
-        <div class="number">I · TRES CAÍDAS</div>
-        <h2>Nuestro Padre Jesús de la Salud en sus Tres Caídas</h2>
+        <div class="number">I · RONDA DE LOS CASINOS</div>
+        <h2>Ronda de los Casinos</h2>
         <p>Primer momento del pregón</p>
       </div>
     </div>
@@ -341,15 +367,13 @@ header p{
   <!-- 3 -->
   <div class="slide">
     <div class="image-frame">
-      <div class="image-frame">
-        <img
-          src="https://www.uniondehermandades.com/wp-content/uploads/2018/10/ANGUSTIAS2.jpg"
-          alt="Nuestra Señora de las Angustias">
-        <div class="caption">
-          <div class="number">III · LAS ANGUSTIAS</div>
-          <h2>Nuestra Señora de las Angustias</h2>
-          <p>Tercer momento del pregón</p>
-        </div>
+      <img
+        src="https://www.uniondehermandades.com/wp-content/uploads/2018/10/ANGUSTIAS2.jpg"
+        alt="Nuestra Señora de las Angustias">
+      <div class="caption">
+        <div class="number">III · LAS ANGUSTIAS</div>
+        <h2>Nuestra Señora de las Angustias</h2>
+        <p>Tercer momento del pregón</p>
       </div>
     </div>
   </div>
@@ -412,9 +436,12 @@ header p{
 
 </div>
 
+<!-- VOLVER A LA PORTADA -->
+<a href="index.html" class="back-home">← Volver a la portada</a>
+
 <!-- REPRODUCTOR DEL PREGÓN -->
 <div class="youtube-box">
-  <div id="pregónPlayer"></div>
+  <div id="pregonPlayer"></div>
 </div>
 
 <!-- REPRODUCTOR DE LA MARCHA -->
@@ -431,67 +458,74 @@ header p{
 <script>
 
 /* =========================================================
-   DATOS DE LOS SEIS FRAGMENTOS
-   Los tiempos están expresados en segundos.
+   FRAGMENTOS DEL PREGÓN
    ========================================================= */
 
 const fragments = [
 
+  /* I · Ronda de los Casinos
+     00:40 → 00:43:20 */
   {
-    start: 2400,
-    end: 2580
+    start:2400,
+    end:2600
   },
 
+  /* II · Los Judíos de San Mateo
+     01:04 → 01:07:50 */
   {
-    start: 3840,
-    end: 4050
+    start:3840,
+    end:4070
   },
 
+  /* III · Las Angustias
+     01:17 → 01:21:38 */
   {
-    start: 4620,
-    end: 4898
+    start:4620,
+    end:4898
   },
 
+  /* IV · Cristo del Amor
+     01:29 → 01:32:18 */
   {
-    start: 5340,
-    end: 5538
+    start:5340,
+    end:5538
   },
 
+  /* V · Esperanza de la Yedra
+     01:42 → 01:47:18 */
   {
-    start: 6120,
-    end: 6468
+    start:6120,
+    end:6438
   },
 
+  /* VI · Virgen de los Dolores
+     02:22:14 → 02:26:28 */
   {
-    start: 8534,
-    end: 8818
+    start:8534,
+    end:8788
   }
 
 ];
 
-/* =========================================================
-   VARIABLES
-   ========================================================= */
+/* VARIABLES */
 
-let slides = document.querySelectorAll(".slide");
-let dots = document.querySelectorAll(".dot");
+let slides=document.querySelectorAll(".slide");
+let dots=document.querySelectorAll(".dot");
 
-let currentSlide = 0;
+let currentSlide=0;
 
 let pregonPlayer;
 let musicPlayer;
 
-let musicPlaying = false;
+let musicPlaying=false;
 
-let timer = null;
+let timer=null;
 
-/* =========================================================
-   YOUTUBE
-   ========================================================= */
+/* YOUTUBE */
 
 function onYouTubeIframeAPIReady(){
 
-  pregonPlayer = new YT.Player("pregónPlayer",{
+  pregonPlayer=new YT.Player("pregonPlayer",{
 
     height:"1",
     width:"1",
@@ -507,26 +541,21 @@ function onYouTubeIframeAPIReady(){
 
     events:{
       onReady:function(){
-
         startFragment(0);
-
       },
 
       onStateChange:function(event){
 
-        if(event.data === YT.PlayerState.ENDED){
-
+        if(event.data===YT.PlayerState.ENDED){
           nextSlide();
-
         }
 
       }
-
     }
 
   });
 
-  musicPlayer = new YT.Player("musicPlayer",{
+  musicPlayer=new YT.Player("musicPlayer",{
 
     height:"1",
     width:"1",
@@ -544,112 +573,88 @@ function onYouTubeIframeAPIReady(){
 
     events:{
       onReady:function(){
-
         musicPlayer.setVolume(8);
-
       }
-
     }
 
   });
 
 }
 
-/* =========================================================
-   INICIAR FRAGMENTO
-   ========================================================= */
+/* INICIAR FRAGMENTO */
 
 function startFragment(index){
 
-  currentSlide = index;
+  currentSlide=index;
 
   showSlide(index);
 
   if(!pregonPlayer) return;
 
-  const fragment = fragments[index];
+  const fragment=fragments[index];
 
   clearTimeout(timer);
 
   pregonPlayer.loadVideoById({
-
     videoId:"Q2vFuXOILCM",
-
     startSeconds:fragment.start
-
   });
 
-  timer = setTimeout(function(){
+  timer=setTimeout(function(){
 
     nextSlide();
 
-  },(fragment.end - fragment.start) * 1000);
+  },(fragment.end-fragment.start)*1000);
 
 }
 
-/* =========================================================
-   MOSTRAR DIAPOSITIVA
-   ========================================================= */
+/* MOSTRAR DIAPOSITIVA */
 
 function showSlide(index){
 
   slides.forEach(function(slide,i){
-
-    slide.classList.toggle("active",i === index);
-
+    slide.classList.toggle("active",i===index);
   });
 
   dots.forEach(function(dot,i){
-
-    dot.classList.toggle("active",i === index);
-
+    dot.classList.toggle("active",i===index);
   });
 
 }
 
-/* =========================================================
-   SIGUIENTE
-   ========================================================= */
+/* SIGUIENTE */
 
 function nextSlide(){
 
   clearTimeout(timer);
 
-  let next = currentSlide + 1;
+  let next=currentSlide+1;
 
-  if(next >= slides.length){
-
-    next = 0;
-
+  if(next>=slides.length){
+    next=0;
   }
 
   startFragment(next);
 
 }
 
-/* =========================================================
-   ANTERIOR
-   ========================================================= */
+/* ANTERIOR */
 
 function previousSlide(){
 
   clearTimeout(timer);
 
-  let previous = currentSlide - 1;
+  let previous=currentSlide-1;
 
-  if(previous < 0){
-
-    previous = slides.length - 1;
-
+  if(previous<0){
+    previous=slides.length-1;
   }
 
   startFragment(previous);
 
 }
 
-/* =========================================================
-   IR A UNA DIAPOSITIVA
-   ========================================================= */
+/* IR A FRAGMENTO */
 
 function goToSlide(index){
 
@@ -659,9 +664,7 @@ function goToSlide(index){
 
 }
 
-/* =========================================================
-   MÚSICA
-   ========================================================= */
+/* MÚSICA */
 
 function toggleMusic(){
 
@@ -670,37 +673,30 @@ function toggleMusic(){
   if(!musicPlaying){
 
     musicPlayer.setVolume(8);
-
     musicPlayer.playVideo();
 
-    musicPlaying = true;
+    musicPlaying=true;
 
   }else{
 
     musicPlayer.pauseVideo();
 
-    musicPlaying = false;
+    musicPlaying=false;
 
   }
 
 }
 
-/* =========================================================
-   TECLADO
-   ========================================================= */
+/* TECLADO */
 
 document.addEventListener("keydown",function(event){
 
-  if(event.key === "ArrowRight"){
-
+  if(event.key==="ArrowRight"){
     nextSlide();
-
   }
 
-  if(event.key === "ArrowLeft"){
-
+  if(event.key==="ArrowLeft"){
     previousSlide();
-
   }
 
 });
