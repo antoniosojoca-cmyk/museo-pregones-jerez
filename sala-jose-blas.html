@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,16 +28,12 @@ body {
   font-family: Georgia, "Times New Roman", serif;
 }
 
-/* CONTENEDOR PRINCIPAL */
-
 .museo {
   position: relative;
   width: 100%;
   height: 100vh;
   background: #050505;
 }
-
-/* CARRUSEL */
 
 .slide {
   position: absolute;
@@ -50,16 +47,12 @@ body {
   opacity: 1;
 }
 
-/* IMÁGENES */
-
 .slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
-/* OSCURECIDO */
 
 .slide::after {
   content: "";
@@ -73,8 +66,6 @@ body {
       rgba(0,0,0,0.82)
     );
 }
-
-/* TEXTO */
 
 .texto {
   position: absolute;
@@ -104,8 +95,6 @@ body {
   line-height: 1.5;
 }
 
-/* FLECHAS */
-
 .flecha {
   position: absolute;
   z-index: 10;
@@ -134,8 +123,6 @@ body {
   right: 15px;
 }
 
-/* PUNTOS */
-
 .puntos {
   position: absolute;
   z-index: 20;
@@ -159,8 +146,6 @@ body {
   background: #d4af37;
 }
 
-/* TITULO SUPERIOR */
-
 .titulo-superior {
   position: absolute;
   z-index: 20;
@@ -174,8 +159,6 @@ body {
   text-shadow: 0 2px 8px #000;
   white-space: nowrap;
 }
-
-/* BOTÓN MÚSICA */
 
 #musicButton {
   position: absolute;
@@ -196,8 +179,6 @@ body {
   background: rgba(212,175,55,0.25);
 }
 
-/* VOLVER */
-
 .volver {
   position: absolute;
   z-index: 25;
@@ -215,8 +196,6 @@ body {
   color: #ffffff;
 }
 
-/* YOUTUBE OCULTO */
-
 .youtube-oculto {
   position: absolute;
   width: 1px;
@@ -226,8 +205,6 @@ body {
   opacity: 0;
   pointer-events: none;
 }
-
-/* ADAPTACIÓN MÓVIL */
 
 @media (max-width: 700px) {
 
@@ -270,9 +247,7 @@ body {
   </div>
 
 
-  <!-- ========================= -->
   <!-- FRAGMENTO 1 -->
-  <!-- ========================= -->
 
   <div class="slide active">
 
@@ -282,18 +257,14 @@ body {
 
       <h1>Borriquita</h1>
 
-      <p>
-        Pregón de José Blas
-      </p>
+      <p>Pregón de José Blas</p>
 
     </div>
 
   </div>
 
 
-  <!-- ========================= -->
   <!-- FRAGMENTO 2 -->
-  <!-- ========================= -->
 
   <div class="slide">
 
@@ -303,18 +274,14 @@ body {
 
       <h1>Fátima</h1>
 
-      <p>
-        Pregón de José Blas
-      </p>
+      <p>Pregón de José Blas</p>
 
     </div>
 
   </div>
 
 
-  <!-- ========================= -->
   <!-- FRAGMENTO 3 -->
-  <!-- ========================= -->
 
   <div class="slide">
 
@@ -324,18 +291,14 @@ body {
 
       <h1>Mayor Dolor</h1>
 
-      <p>
-        Pregón de José Blas
-      </p>
+      <p>Pregón de José Blas</p>
 
     </div>
 
   </div>
 
 
-  <!-- ========================= -->
   <!-- FRAGMENTO 4 -->
-  <!-- ========================= -->
 
   <div class="slide">
 
@@ -345,18 +308,14 @@ body {
 
       <h1>Traspaso</h1>
 
-      <p>
-        Pregón de José Blas
-      </p>
+      <p>Pregón de José Blas</p>
 
     </div>
 
   </div>
 
 
-  <!-- ========================= -->
   <!-- FRAGMENTO 5 -->
-  <!-- ========================= -->
 
   <div class="slide">
 
@@ -366,18 +325,14 @@ body {
 
       <h1>El Cristo</h1>
 
-      <p>
-        Pregón de José Blas
-      </p>
+      <p>Pregón de José Blas</p>
 
     </div>
 
   </div>
 
 
-  <!-- ========================= -->
   <!-- FRAGMENTO 6 -->
-  <!-- ========================= -->
 
   <div class="slide">
 
@@ -387,9 +342,7 @@ body {
 
       <h1>Amargura</h1>
 
-      <p>
-        Pregón de José Blas
-      </p>
+      <p>Pregón de José Blas</p>
 
     </div>
 
@@ -424,10 +377,7 @@ body {
   </a>
 
 
-  <!-- ========================= -->
-  <!-- REPRODUCTOR PREGÓN -->
-  <!-- VÍDEO CORRECTO: 2C58SaN-esg -->
-  <!-- ========================= -->
+  <!-- PREGÓN DE JOSÉ BLAS -->
 
   <div class="youtube-oculto">
 
@@ -436,9 +386,7 @@ body {
   </div>
 
 
-  <!-- ========================= -->
-  <!-- REPRODUCTOR MÚSICA -->
-  <!-- ========================= -->
+  <!-- MÚSICA -->
 
   <div class="youtube-oculto">
 
@@ -446,8 +394,6 @@ body {
 
   </div>
 
-
-  <!-- BOTÓN MÚSICA -->
 
   <button id="musicButton" onclick="toggleMusic()">
     ♪
@@ -462,7 +408,8 @@ body {
 
 /* ==========================================
    FRAGMENTOS DEL PREGÓN DE JOSÉ BLAS
-   VÍDEO CORRECTO: 2C58SaN-esg
+
+   VÍDEO: 2C58SaN-esg
    ========================================== */
 
 const fragmentos = [
@@ -470,19 +417,19 @@ const fragmentos = [
   {
     titulo: "BORRIQUITA",
     start: 3527,
-    end: 3623
+    end: 3658
   },
 
   {
     titulo: "FÁTIMA",
     start: 4360,
-    end: 4465
+    end: 4500
   },
 
   {
     titulo: "MAYOR DOLOR",
-    start: 7212,
-    end: 7406
+    start: 7907,
+    end: 8016
   },
 
   {
@@ -500,7 +447,7 @@ const fragmentos = [
   {
     titulo: "AMARGURA",
     start: 10317,
-    end: 10588
+    end: 10623
   }
 
 ];
@@ -520,8 +467,6 @@ let musicPlaying = false;
    ========================================== */
 
 function onYouTubeIframeAPIReady() {
-
-  /* PREGÓN DE JOSÉ BLAS */
 
   pregonPlayer = new YT.Player("pregonPlayer", {
 
@@ -549,8 +494,6 @@ function onYouTubeIframeAPIReady() {
 
   });
 
-
-  /* MÚSICA AMBIENTAL */
 
   musicPlayer = new YT.Player("musicPlayer", {
 
@@ -595,9 +538,7 @@ function iniciarFragmento(numero) {
 
   mostrarSlide(indice);
 
-
   const fragmento = fragmentos[indice];
-
 
   if (pregonPlayer) {
 
@@ -611,10 +552,8 @@ function iniciarFragmento(numero) {
 
   }
 
-
   const duracion =
     (fragmento.end - fragmento.start) * 1000;
-
 
   temporizador = setTimeout(function() {
 
@@ -645,7 +584,6 @@ function mostrarSlide(numero) {
   const puntos =
     document.querySelectorAll(".punto");
 
-
   slides.forEach(function(slide, i) {
 
     slide.classList.toggle(
@@ -654,7 +592,6 @@ function mostrarSlide(numero) {
     );
 
   });
-
 
   puntos.forEach(function(punto, i) {
 
@@ -703,7 +640,7 @@ function anterior() {
 
 
 /* ==========================================
-   IR A UN FRAGMENTO
+   IR A FRAGMENTO
    ========================================== */
 
 function irA(numero) {
@@ -722,7 +659,6 @@ function toggleMusic() {
   if (!musicPlayer) {
     return;
   }
-
 
   if (!musicPlaying) {
 
@@ -749,5 +685,6 @@ function toggleMusic() {
 </body>
 
 </html>
+
 
 
