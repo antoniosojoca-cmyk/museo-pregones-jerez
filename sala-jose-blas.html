@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,409 +11,248 @@
 
 <style>
 
-*{
-  box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  background:#050505;
-  color:#fff;
-  font-family:Georgia,"Times New Roman",serif;
-  overflow:hidden;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050505;
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-body{
-  background:
-  radial-gradient(circle at center,#191919 0%,#080808 55%,#020202 100%);
-}
+/* CONTENEDOR PRINCIPAL */
 
-/* CABECERA */
-
-header{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:20;
-  padding:22px 30px 15px;
-  text-align:center;
-
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.88),
-    rgba(0,0,0,.35),
-    transparent
-  );
-}
-
-header h1{
-  margin:0;
-  color:#d4af37;
-  font-size:clamp(24px,3vw,42px);
-  font-weight:normal;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  text-shadow:0 2px 8px #000;
-}
-
-header p{
-  margin:7px 0 0;
-  color:#d8d0bd;
-  font-size:clamp(12px,1.3vw,16px);
-  letter-spacing:2px;
+.museo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #050505;
 }
 
 /* CARRUSEL */
 
-.carousel{
-  position:relative;
-  width:100%;
-  height:100vh;
-  overflow:hidden;
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  background: #050505;
 }
 
-.slide{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  visibility:hidden;
-
-  transition:opacity 1.2s ease;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.slide.active {
+  opacity: 1;
 }
 
-.slide.active{
-  opacity:1;
-  visibility:visible;
+/* IMÁGENES */
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* IMAGEN */
+/* OSCURECIDO */
 
-.image-frame{
-  position:relative;
-
-  width:92vw;
-  height:78vh;
-
-  margin-top:35px;
-
-  overflow:hidden;
-
-  border:1px solid rgba(212,175,55,.35);
-
-  box-shadow:
-    0 0 35px rgba(0,0,0,.95),
-    0 0 80px rgba(0,0,0,.75);
-
-  background:#000;
-}
-
-.image-frame::after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
-  linear-gradient(
-    to bottom,
-    rgba(0,0,0,.05),
-    transparent 60%,
-    rgba(0,0,0,.45)
-  );
-
-  pointer-events:none;
-}
-
-.slide img{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-  object-position:center;
-
-  display:block;
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.30) 45%,
+      rgba(0,0,0,0.82)
+    );
 }
 
 /* TEXTO */
 
-.caption{
-  position:absolute;
-
-  left:0;
-  right:0;
-  bottom:0;
-
-  z-index:5;
-
-  padding:55px 35px 25px;
-
-  text-align:center;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,.9),
-    rgba(0,0,0,.45),
-    transparent
-  );
+.texto {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 13%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1000px;
+  text-align: center;
+  text-shadow:
+    0 2px 5px #000,
+    0 3px 12px #000;
 }
 
-.caption .number{
-  color:#d4af37;
-
-  font-size:13px;
-
-  letter-spacing:4px;
-
-  margin-bottom:6px;
+.texto h1 {
+  margin: 0 0 14px;
+  color: #d4af37;
+  font-size: clamp(28px, 4vw, 58px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.caption h2{
-  margin:0;
-
-  font-size:clamp(22px,2.5vw,36px);
-
-  font-weight:normal;
-
-  text-shadow:0 2px 8px #000;
-}
-
-.caption p{
-  margin:7px 0 0;
-
-  color:#d8d0bd;
-
-  font-size:clamp(13px,1.2vw,16px);
-
-  font-style:italic;
+.texto p {
+  margin: 0;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.5;
 }
 
 /* FLECHAS */
 
-.arrow{
-  position:absolute;
-
-  top:50%;
-
-  transform:translateY(-50%);
-
-  z-index:15;
-
-  width:48px;
-  height:70px;
-
-  border:0;
-
-  background:rgba(0,0,0,.38);
-
-  color:#d4af37;
-
-  font-size:42px;
-
-  cursor:pointer;
-
-  transition:.3s;
+.flecha {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 70px;
+  border: none;
+  background: rgba(0,0,0,0.35);
+  color: #d4af37;
+  font-size: 48px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.arrow:hover{
-  background:rgba(212,175,55,.15);
-  color:#fff;
+.flecha:hover {
+  background: rgba(212,175,55,0.25);
+  color: #ffffff;
 }
 
-.arrow.left{
-  left:12px;
+.izquierda {
+  left: 15px;
 }
 
-.arrow.right{
-  right:12px;
+.derecha {
+  right: 15px;
 }
 
 /* PUNTOS */
 
-.dots{
-  position:absolute;
-
-  bottom:52px;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  z-index:20;
-
-  display:flex;
-
-  gap:9px;
+.puntos {
+  position: absolute;
+  z-index: 20;
+  bottom: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
 }
 
-.dot{
-  width:9px;
-  height:9px;
-
-  border-radius:50%;
-
-  border:1px solid #d4af37;
-
-  background:transparent;
-
-  cursor:pointer;
-
-  transition:.3s;
+.punto {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(212,175,55,0.8);
+  cursor: pointer;
 }
 
-.dot.active{
-  background:#d4af37;
+.punto.active {
+  background: #d4af37;
+}
 
-  box-shadow:
-  0 0 8px rgba(212,175,55,.7);
+/* TITULO SUPERIOR */
+
+.titulo-superior {
+  position: absolute;
+  z-index: 20;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d4af37;
+  font-size: clamp(18px, 2vw, 28px);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px #000;
+  white-space: nowrap;
 }
 
 /* BOTÓN MÚSICA */
 
-.music-button{
-  position:absolute;
-
-  right:20px;
-  top:20px;
-
-  z-index:30;
-
-  width:42px;
-  height:42px;
-
-  border-radius:50%;
-
-  border:1px solid rgba(212,175,55,.65);
-
-  background:rgba(0,0,0,.55);
-
-  color:#d4af37;
-
-  cursor:pointer;
-
-  font-size:17px;
-
-  transition:.3s;
+#musicButton {
+  position: absolute;
+  z-index: 30;
+  right: 25px;
+  bottom: 25px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #d4af37;
+  background: rgba(0,0,0,0.65);
+  color: #d4af37;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.music-button:hover{
-  background:rgba(212,175,55,.15);
-  color:#fff;
+#musicButton:hover {
+  background: rgba(212,175,55,0.25);
 }
 
 /* VOLVER */
 
-.back-home{
-  position:absolute;
-
-  left:50%;
-  bottom:14px;
-
-  transform:translateX(-50%);
-
-  z-index:25;
-
-  color:#d4af37;
-
-  text-decoration:none;
-
-  font-size:14px;
-
-  letter-spacing:1.5px;
-
-  padding:5px 12px;
-
-  transition:.3s;
-
-  white-space:nowrap;
+.volver {
+  position: absolute;
+  z-index: 25;
+  left: 25px;
+  bottom: 25px;
+  color: #d4af37;
+  text-decoration: none;
+  font-size: 17px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 5px #000;
+  transition: color 0.3s ease;
 }
 
-.back-home:hover{
-  color:#fff;
-
-  text-shadow:
-  0 0 8px rgba(212,175,55,.7);
+.volver:hover {
+  color: #ffffff;
 }
 
 /* YOUTUBE OCULTO */
 
-.youtube-box{
-  position:absolute;
-
-  width:1px;
-  height:1px;
-
-  left:-9999px;
-  top:-9999px;
-
-  opacity:0;
-
-  pointer-events:none;
+.youtube-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: -10000px;
+  top: -10000px;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* MÓVIL */
+/* ADAPTACIÓN MÓVIL */
 
-@media(max-width:700px){
+@media (max-width: 700px) {
 
-  header{
-    padding:16px 50px 12px 15px;
+  .texto {
+    bottom: 16%;
+    width: 92%;
   }
 
-  header h1{
-    font-size:22px;
-    letter-spacing:2px;
+  .texto h1 {
+    letter-spacing: 1px;
   }
 
-  header p{
-    font-size:11px;
-    letter-spacing:1px;
+  .texto p {
+    font-size: 18px;
   }
 
-  .image-frame{
-    width:100%;
-    height:72vh;
-
-    border-left:0;
-    border-right:0;
+  .flecha {
+    width: 40px;
+    font-size: 35px;
   }
 
-  .arrow{
-    width:38px;
-    height:55px;
-
-    font-size:30px;
-  }
-
-  .arrow.left{
-    left:4px;
-  }
-
-  .arrow.right{
-    right:4px;
-  }
-
-  .caption{
-    padding:45px 15px 22px;
-  }
-
-  .caption h2{
-    font-size:22px;
-  }
-
-  .caption p{
-    font-size:13px;
-  }
-
-  .back-home{
-    font-size:12px;
-    bottom:12px;
+  .titulo-superior {
+    top: 18px;
+    font-size: 16px;
+    letter-spacing: 2px;
   }
 
 }
@@ -423,685 +263,491 @@ header p{
 
 <body>
 
-<header>
+<div class="museo">
 
-<h1>Sala II — José Blas</h1>
+  <div class="titulo-superior">
+    SALA II · JOSÉ BLAS
+  </div>
 
-<p>
-Seis momentos de un pregón · Seis miradas de la Semana Santa de Jerez
-</p>
 
-</header>
+  <!-- ========================= -->
+  <!-- FRAGMENTO 1 -->
+  <!-- ========================= -->
 
+  <div class="slide active">
 
-<div class="carousel">
+    <img src="https://static.grupojoly.com/clip/ea6fa727-9a52-4935-bc5f-3a88e4d7018e_16-9-aspect-ratio_1200w_0.webp">
 
+    <div class="texto">
 
-<!-- =====================================================
-     I · BORRIQUITA
-===================================================== -->
+      <h1>Borriquita</h1>
 
-<div class="slide active">
+      <p>
+        Pregón de José Blas
+      </p>
 
-<div class="image-frame">
+    </div>
 
-<img
-src="https://static.grupojoly.com/clip/ea6fa727-9a52-4935-bc5f-3a88e4d7018e_16-9-aspect-ratio_1200w_0.webp"
-alt="La Borriquita">
+  </div>
 
-<div class="caption">
 
-<div class="number">
-I · LA BORRIQUITA
-</div>
+  <!-- ========================= -->
+  <!-- FRAGMENTO 2 -->
+  <!-- ========================= -->
 
-<h2>
-La Borriquita
-</h2>
+  <div class="slide">
 
-<p>
-Primer momento del pregón
-</p>
+    <img src="https://static.grupojoly.com/clip/a973920e-fe82-47c5-86c6-1c725546c0a6_source-aspect-ratio_1600w_0.webp">
 
-</div>
+    <div class="texto">
 
-</div>
+      <h1>Fátima</h1>
 
-</div>
+      <p>
+        Pregón de José Blas
+      </p>
 
+    </div>
 
-<!-- =====================================================
-     II · FÁTIMA
-===================================================== -->
+  </div>
 
-<div class="slide">
 
-<div class="image-frame">
+  <!-- ========================= -->
+  <!-- FRAGMENTO 3 -->
+  <!-- ========================= -->
 
-<img
-src="https://static.grupojoly.com/clip/a973920e-fe82-47c5-86c6-1c725546c0a6_source-aspect-ratio_1600w_0.webp"
-alt="Fátima">
+  <div class="slide">
 
-<div class="caption">
+    <img src="https://www.jerez.es/fileadmin/DesarrolloWeb/ESPECIALES/MAGNA_MARIANA_JEREZ_2024/IMG_Imagineria/mayordolor.jpg">
 
-<div class="number">
-II · FÁTIMA
-</div>
+    <div class="texto">
 
-<h2>
-Fátima
-</h2>
+      <h1>Mayor Dolor</h1>
 
-<p>
-Segundo momento del pregón
-</p>
+      <p>
+        Pregón de José Blas
+      </p>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
-</div>
 
+  <!-- ========================= -->
+  <!-- FRAGMENTO 4 -->
+  <!-- ========================= -->
 
-<!-- =====================================================
-     III · MAYOR DOLOR
-===================================================== -->
+  <div class="slide">
 
-<div class="slide">
+    <img src="https://static.grupojoly.com/clip/7c5db7e1-26de-412f-8ea4-3609c0b3f7b1_source-aspect-ratio_1600w_0.webp">
 
-<div class="image-frame">
+    <div class="texto">
 
-<img
-src="https://www.jerez.es/fileadmin/DesarrolloWeb/ESPECIALES/MAGNA_MARIANA_JEREZ_2024/IMG_Imagineria/mayordolor.jpg"
-alt="Mayor Dolor">
+      <h1>Traspaso</h1>
 
-<div class="caption">
+      <p>
+        Pregón de José Blas
+      </p>
 
-<div class="number">
-III · MAYOR DOLOR
-</div>
+    </div>
 
-<h2>
-Mayor Dolor
-</h2>
+  </div>
 
-<p>
-Tercer momento del pregón
-</p>
 
-</div>
+  <!-- ========================= -->
+  <!-- FRAGMENTO 5 -->
+  <!-- ========================= -->
 
-</div>
+  <div class="slide">
 
-</div>
+    <img src="https://static.grupojoly.com/clip/f31cbdf3-3378-48f9-a908-f534fcd30c6f_16-9-aspect-ratio_1200w_0.webp">
 
+    <div class="texto">
 
-<!-- =====================================================
-     IV · TRASPASO
-===================================================== -->
+      <h1>El Cristo</h1>
 
-<div class="slide">
+      <p>
+        Pregón de José Blas
+      </p>
 
-<div class="image-frame">
+    </div>
 
-<img
-src="https://static.grupojoly.com/clip/7c5db7e1-26de-412f-8ea4-3609c0b3f7b1_source-aspect-ratio_1600w_0.webp"
-alt="El Traspaso">
+  </div>
 
-<div class="caption">
 
-<div class="number">
-IV · EL TRASPASO
-</div>
+  <!-- ========================= -->
+  <!-- FRAGMENTO 6 -->
+  <!-- ========================= -->
 
-<h2>
-El Traspaso
-</h2>
+  <div class="slide">
 
-<p>
-Cuarto momento del pregón
-</p>
+    <img src="https://i.pinimg.com/1200x/85/31/5b/85315b7f2f8cb61698411699a23027ab.jpg">
 
-</div>
+    <div class="texto">
 
-</div>
+      <h1>Amargura</h1>
 
-</div>
+      <p>
+        Pregón de José Blas
+      </p>
 
+    </div>
 
-<!-- =====================================================
-     V · EL CRISTO
-===================================================== -->
+  </div>
 
-<div class="slide">
 
-<div class="image-frame">
+  <!-- FLECHAS -->
 
-<img
-src="https://static.grupojoly.com/clip/f31cbdf3-3378-48f9-a908-f534fcd30c6f_16-9-aspect-ratio_1200w_0.webp"
-alt="El Cristo">
+  <button class="flecha izquierda" onclick="anterior()">‹</button>
 
-<div class="caption">
+  <button class="flecha derecha" onclick="siguiente()">›</button>
 
-<div class="number">
-V · EL CRISTO
-</div>
 
-<h2>
-El Cristo
-</h2>
+  <!-- PUNTOS -->
 
-<p>
-Quinto momento del pregón
-</p>
+  <div class="puntos">
 
-</div>
+    <span class="punto active" onclick="irA(0)"></span>
+    <span class="punto" onclick="irA(1)"></span>
+    <span class="punto" onclick="irA(2)"></span>
+    <span class="punto" onclick="irA(3)"></span>
+    <span class="punto" onclick="irA(4)"></span>
+    <span class="punto" onclick="irA(5)"></span>
 
-</div>
+  </div>
 
-</div>
 
+  <!-- VOLVER -->
 
-<!-- =====================================================
-     VI · AMARGURA
-===================================================== -->
+  <a class="volver" href="index.html">
+    ← Volver a la portada
+  </a>
 
-<div class="slide">
 
-<div class="image-frame">
+  <!-- ========================= -->
+  <!-- REPRODUCTOR PREGÓN -->
+  <!-- VÍDEO CORRECTO: 2C58SaN-esg -->
+  <!-- ========================= -->
 
-<img
-src="https://i.pinimg.com/1200x/85/31/5b/85315b7f2f8cb61698411699a23027ab.jpg"
-alt="La Amargura">
+  <div class="youtube-oculto">
 
-<div class="caption">
+    <div id="pregonPlayer"></div>
 
-<div class="number">
-VI · AMARGURA
-</div>
+  </div>
 
-<h2>
-La Amargura
-</h2>
 
-<p>
-Sexto momento del pregón
-</p>
+  <!-- ========================= -->
+  <!-- REPRODUCTOR MÚSICA -->
+  <!-- ========================= -->
+
+  <div class="youtube-oculto">
+
+    <div id="musicPlayer"></div>
+
+  </div>
+
+
+  <!-- BOTÓN MÚSICA -->
+
+  <button id="musicButton" onclick="toggleMusic()">
+    ♪
+  </button>
 
 </div>
-
-</div>
-
-</div>
-
-
-<!-- FLECHAS -->
-
-<button
-class="arrow left"
-onclick="previousSlide()"
-aria-label="Anterior">
-‹
-</button>
-
-<button
-class="arrow right"
-onclick="nextSlide()"
-aria-label="Siguiente">
-›
-</button>
-
-
-<!-- PUNTOS -->
-
-<div class="dots">
-
-<button
-class="dot active"
-onclick="goToSlide(0)">
-</button>
-
-<button
-class="dot"
-onclick="goToSlide(1)">
-</button>
-
-<button
-class="dot"
-onclick="goToSlide(2)">
-</button>
-
-<button
-class="dot"
-onclick="goToSlide(3)">
-</button>
-
-<button
-class="dot"
-onclick="goToSlide(4)">
-</button>
-
-<button
-class="dot"
-onclick="goToSlide(5)">
-</button>
-
-</div>
-
-</div>
-
-
-<!-- VOLVER A PORTADA -->
-
-<a
-href="index.html"
-class="back-home">
-
-← Volver a la portada
-
-</a>
-
-
-<!-- REPRODUCTOR PREGÓN -->
-
-<div class="youtube-box">
-
-<div id="pregonPlayer"></div>
-
-</div>
-
-
-<!-- REPRODUCTOR MARCHA -->
-
-<div class="youtube-box">
-
-<div id="musicPlayer"></div>
-
-</div>
-
-
-<!-- BOTÓN MÚSICA -->
-
-<button
-class="music-button"
-onclick="toggleMusic()"
-title="Música de fondo">
-
-♪
-
-</button>
 
 
 <script src="https://www.youtube.com/iframe_api"></script>
 
-
 <script>
 
-/* =========================================================
+/* ==========================================
    FRAGMENTOS DEL PREGÓN DE JOSÉ BLAS
+   VÍDEO CORRECTO: 2C58SaN-esg
+   ========================================== */
 
-   Vídeo:
-   Q2vFuXOILCM
-========================================================= */
-
-const fragments = [
-
-  /* I · BORRIQUITA
-     00:58:47 → 01:00:23 */
+const fragmentos = [
 
   {
-    start:3527,
-    end:3623
+    titulo: "BORRIQUITA",
+    start: 3527,
+    end: 3623
   },
 
-
-  /* II · FÁTIMA
-     01:12:40 → 01:14:25 */
-
   {
-    start:4360,
-    end:4465
+    titulo: "FÁTIMA",
+    start: 4360,
+    end: 4465
   },
 
-
-  /* III · MAYOR DOLOR
-     02:00:12 → 02:03:26 */
-
   {
-    start:7212,
-    end:7406
+    titulo: "MAYOR DOLOR",
+    start: 7212,
+    end: 7406
   },
 
-
-  /* IV · EL TRASPASO
-     02:23:20 → 02:24:34 */
-
   {
-    start:8600,
-    end:8674
+    titulo: "TRASPASO",
+    start: 8600,
+    end: 8674
   },
 
-
-  /* V · EL CRISTO
-     02:37:00 → 02:38:13 */
-
   {
-    start:9420,
-    end:9493
+    titulo: "EL CRISTO",
+    start: 9420,
+    end: 9493
   },
 
-
-  /* VI · AMARGURA
-     02:51:57 → 02:56:28 */
-
   {
-    start:10317,
-    end:10588
+    titulo: "AMARGURA",
+    start: 10317,
+    end: 10588
   }
 
 ];
 
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+let indice = 0;
+let temporizador = null;
 
-let slides=document.querySelectorAll(".slide");
+let pregonPlayer = null;
+let musicPlayer = null;
 
-let dots=document.querySelectorAll(".dot");
-
-let currentSlide=0;
-
-let pregonPlayer;
-
-let musicPlayer;
-
-let musicPlaying=false;
-
-let timer=null;
+let musicPlaying = false;
 
 
-/* =========================================================
-   YOUTUBE
-========================================================= */
+/* ==========================================
+   CREAR LOS REPRODUCTORES
+   ========================================== */
 
-function onYouTubeIframeAPIReady(){
+function onYouTubeIframeAPIReady() {
 
-  pregonPlayer=new YT.Player(
-    "pregonPlayer",
-    {
+  /* PREGÓN DE JOSÉ BLAS */
 
-      height:"1",
+  pregonPlayer = new YT.Player("pregonPlayer", {
 
-      width:"1",
+    height: "1",
+    width: "1",
 
-      videoId:"Q2vFuXOILCM",
+    videoId: "2C58SaN-esg",
 
-      playerVars:{
-        autoplay:0,
-        controls:0,
-        rel:0,
-        modestbranding:1
-      },
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      rel: 0,
+      playsinline: 1
+    },
 
-      events:{
+    events: {
 
-        onReady:function(){
+      onReady: function() {
 
-          startFragment(0);
-
-        },
-
-        onStateChange:function(event){
-
-          if(
-            event.data===YT.PlayerState.ENDED
-          ){
-
-            nextSlide();
-
-          }
-
-        }
+        iniciarFragmento(0);
 
       }
 
     }
-  );
-
-
-  /* MÚSICA */
-
-  musicPlayer=new YT.Player(
-    "musicPlayer",
-    {
-
-      height:"1",
-
-      width:"1",
-
-      videoId:"JbE0dBSUGkk",
-
-      playerVars:{
-        autoplay:0,
-        controls:0,
-        loop:1,
-        playlist:"JbE0dBSUGkk",
-        rel:0,
-        modestbranding:1
-      },
-
-      events:{
-
-        onReady:function(){
-
-          musicPlayer.setVolume(8);
-
-        }
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   INICIAR FRAGMENTO
-========================================================= */
-
-function startFragment(index){
-
-  currentSlide=index;
-
-  showSlide(index);
-
-  if(!pregonPlayer){
-
-    return;
-
-  }
-
-  const fragment=fragments[index];
-
-  clearTimeout(timer);
-
-
-  pregonPlayer.loadVideoById({
-
-    videoId:"Q2vFuXOILCM",
-
-    startSeconds:fragment.start
 
   });
 
 
-  timer=setTimeout(
+  /* MÚSICA AMBIENTAL */
 
-    function(){
+  musicPlayer = new YT.Player("musicPlayer", {
 
-      nextSlide();
+    height: "1",
+    width: "1",
 
+    videoId: "JbE0dBSUGkk",
+
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      loop: 1,
+      playlist: "JbE0dBSUGkk",
+      rel: 0,
+      playsinline: 1
     },
 
-    (fragment.end-fragment.start)*1000
+    events: {
 
-  );
+      onReady: function(event) {
+
+        event.target.setVolume(8);
+
+      }
+
+    }
+
+  });
 
 }
 
 
-/* =========================================================
-   MOSTRAR DIAPOSITIVA
-========================================================= */
+/* ==========================================
+   INICIAR FRAGMENTO
+   ========================================== */
 
-function showSlide(index){
+function iniciarFragmento(numero) {
 
-  slides.forEach(
+  clearTimeout(temporizador);
 
-    function(slide,i){
+  indice = numero;
 
-      slide.classList.toggle(
-        "active",
-        i===index
-      );
+  mostrarSlide(indice);
+
+
+  const fragmento = fragmentos[indice];
+
+
+  if (pregonPlayer) {
+
+    pregonPlayer.loadVideoById({
+
+      videoId: "2C58SaN-esg",
+
+      startSeconds: fragmento.start
+
+    });
+
+  }
+
+
+  const duracion =
+    (fragmento.end - fragmento.start) * 1000;
+
+
+  temporizador = setTimeout(function() {
+
+    if (indice < fragmentos.length - 1) {
+
+      iniciarFragmento(indice + 1);
+
+    } else {
+
+      iniciarFragmento(0);
 
     }
 
-  );
-
-
-  dots.forEach(
-
-    function(dot,i){
-
-      dot.classList.toggle(
-        "active",
-        i===index
-      );
-
-    }
-
-  );
+  }, duracion);
 
 }
 
 
-/* =========================================================
+/* ==========================================
+   MOSTRAR SLIDE
+   ========================================== */
+
+function mostrarSlide(numero) {
+
+  const slides =
+    document.querySelectorAll(".slide");
+
+  const puntos =
+    document.querySelectorAll(".punto");
+
+
+  slides.forEach(function(slide, i) {
+
+    slide.classList.toggle(
+      "active",
+      i === numero
+    );
+
+  });
+
+
+  puntos.forEach(function(punto, i) {
+
+    punto.classList.toggle(
+      "active",
+      i === numero
+    );
+
+  });
+
+}
+
+
+/* ==========================================
    SIGUIENTE
-========================================================= */
+   ========================================== */
 
-function nextSlide(){
+function siguiente() {
 
-  clearTimeout(timer);
+  let nuevo = indice + 1;
 
-  let next=currentSlide+1;
-
-  if(next>=slides.length){
-
-    next=0;
-
+  if (nuevo >= fragmentos.length) {
+    nuevo = 0;
   }
 
-  startFragment(next);
+  iniciarFragmento(nuevo);
 
 }
 
 
-/* =========================================================
+/* ==========================================
    ANTERIOR
-========================================================= */
+   ========================================== */
 
-function previousSlide(){
+function anterior() {
 
-  clearTimeout(timer);
+  let nuevo = indice - 1;
 
-  let previous=currentSlide-1;
-
-  if(previous<0){
-
-    previous=slides.length-1;
-
+  if (nuevo < 0) {
+    nuevo = fragmentos.length - 1;
   }
 
-  startFragment(previous);
+  iniciarFragmento(nuevo);
 
 }
 
 
-/* =========================================================
-   IR A FRAGMENTO
-========================================================= */
+/* ==========================================
+   IR A UN FRAGMENTO
+   ========================================== */
 
-function goToSlide(index){
+function irA(numero) {
 
-  clearTimeout(timer);
-
-  startFragment(index);
+  iniciarFragmento(numero);
 
 }
 
 
-/* =========================================================
+/* ==========================================
    MÚSICA
-========================================================= */
+   ========================================== */
 
-function toggleMusic(){
+function toggleMusic() {
 
-  if(!musicPlayer){
-
+  if (!musicPlayer) {
     return;
-
   }
 
 
-  if(!musicPlaying){
-
-    musicPlayer.setVolume(8);
+  if (!musicPlaying) {
 
     musicPlayer.playVideo();
 
-    musicPlaying=true;
+    musicPlaying = true;
 
-  }
+    document.getElementById("musicButton").innerHTML = "❚❚";
 
-  else{
+  } else {
 
     musicPlayer.pauseVideo();
 
-    musicPlaying=false;
+    musicPlaying = false;
+
+    document.getElementById("musicButton").innerHTML = "♪";
 
   }
 
 }
-
-
-/* =========================================================
-   TECLADO
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key==="ArrowRight"){
-
-      nextSlide();
-
-    }
-
-    if(event.key==="ArrowLeft"){
-
-      previousSlide();
-
-    }
-
-  }
-);
 
 </script>
 
 </body>
 
 </html>
+
+
