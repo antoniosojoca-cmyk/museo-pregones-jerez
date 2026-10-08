@@ -1,11 +1,10 @@
 
-
-
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -24,14 +23,21 @@
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    /* CABECERA */
+
+    /* =========================
+       CABECERA
+    ========================= */
 
     header {
       text-align: center;
       padding: 55px 20px 35px;
       border-bottom: 1px solid #8f7440;
+
       background:
-        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.65)),
+        linear-gradient(
+          rgba(0,0,0,0.35),
+          rgba(0,0,0,0.65)
+        ),
         #17130e;
     }
 
@@ -51,7 +57,10 @@
       letter-spacing: 1px;
     }
 
-    /* INTRODUCCIÓN */
+
+    /* =========================
+       INTRODUCCIÓN
+    ========================= */
 
     .introduccion {
       max-width: 900px;
@@ -67,86 +76,172 @@
       line-height: 1.7;
     }
 
-    /* SALAS */
+
+    /* =========================
+       CUATRO SALAS
+    ========================= */
 
     .salas {
+      width: 100%;
       max-width: 1200px;
+
       margin: 35px auto 70px;
       padding: 0 20px;
 
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+
+      /* DOS COLUMNAS EXACTAMENTE IGUALES */
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
       gap: 30px;
     }
 
+
+    /* =========================
+       TARJETA DE CADA SALA
+    ========================= */
+
     .sala {
+
+      width: 100%;
+      height: 500px;
+
+      display: grid;
+
+      /* IMAGEN IGUAL + TEXTO IGUAL */
+      grid-template-rows: 330px 1fr;
+
       background: #12100d;
+
       border: 1px solid #765f35;
+
       padding: 12px;
+
       text-decoration: none;
       color: inherit;
 
-      transition: transform 0.3s ease,
-                  border-color 0.3s ease,
-                  box-shadow 0.3s ease;
+      overflow: hidden;
+
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
     }
+
 
     .sala:hover {
+
       transform: translateY(-6px);
+
       border-color: #d6b56a;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.65);
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.65);
     }
 
+
+    /* =========================
+       IMAGEN
+    ========================= */
+
     .imagen {
+
       width: 100%;
       height: 330px;
+
       overflow: hidden;
+
       background: #050505;
     }
 
+
     .imagen img {
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
+      object-position: center;
+
       display: block;
 
-      transition: transform 0.5s ease;
+      transition:
+        transform 0.5s ease;
     }
 
+
     .sala:hover .imagen img {
+
       transform: scale(1.04);
     }
 
+
+    /* =========================
+       TEXTO DE LAS SALAS
+    ========================= */
+
     .texto {
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
       text-align: center;
-      padding: 22px 10px 20px;
+
+      padding: 18px 10px 15px;
     }
 
+
     .numero {
+
       display: block;
+
       font-size: 13px;
+
       letter-spacing: 3px;
+
       color: #9f8650;
+
       margin-bottom: 8px;
     }
 
+
     .texto h2 {
+
       margin: 0;
+
       font-size: 27px;
+
       font-weight: normal;
+
       color: #d6b56a;
     }
 
+
     .texto p {
+
       margin: 8px 0 0;
+
       font-size: 18px;
+
       color: #ddd2bb;
     }
 
-    /* MÚSICA */
+
+    /* =========================
+       MÚSICA
+    ========================= */
 
     .musica {
+
       position: fixed;
+
       right: 22px;
       bottom: 22px;
 
@@ -154,49 +249,78 @@
       height: 48px;
 
       border-radius: 50%;
+
       border: 1px solid #b99a55;
 
       background: #15110c;
+
       color: #d6b56a;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
       font-size: 22px;
 
       cursor: pointer;
+
       z-index: 1000;
 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.6);
     }
 
+
     .musica:hover {
+
       background: #241c11;
+
       border-color: #e0c27a;
     }
 
+
+    /* =========================
+       YOUTUBE OCULTO
+    ========================= */
+
     .youtube {
+
       position: fixed;
+
       width: 1px;
       height: 1px;
+
       left: -100px;
       top: -100px;
+
       opacity: 0;
+
       pointer-events: none;
     }
 
-    /* PIE */
+
+    /* =========================
+       PIE
+    ========================= */
 
     footer {
+
       text-align: center;
+
       padding: 25px 15px 40px;
+
       border-top: 1px solid #4e4027;
+
       color: #817761;
+
       font-size: 14px;
     }
 
-    /* MÓVIL */
+
+    /* =========================
+       MÓVIL
+    ========================= */
 
     @media (max-width: 750px) {
 
@@ -205,33 +329,50 @@
       }
 
       header h1 {
+
         font-size: 30px;
+
         letter-spacing: 2px;
       }
 
       header p {
+
         font-size: 16px;
       }
 
+
       .salas {
+
         grid-template-columns: 1fr;
+
         gap: 25px;
       }
 
+
+      .sala {
+
+        height: 500px;
+      }
+
+
       .imagen {
-        height: 300px;
+
+        height: 330px;
       }
 
     }
 
   </style>
+
 </head>
 
 
 <body>
 
 
-  <!-- CABECERA -->
+  <!-- =========================
+       CABECERA
+  ========================= -->
 
   <header>
 
@@ -244,7 +385,9 @@
   </header>
 
 
-  <!-- INTRODUCCIÓN -->
+  <!-- =========================
+       INTRODUCCIÓN
+  ========================= -->
 
   <section class="introduccion">
 
@@ -256,95 +399,159 @@
   </section>
 
 
-  <!-- CUATRO SALAS -->
+  <!-- =========================
+       CUATRO SALAS
+  ========================= -->
 
   <main class="salas">
 
 
-    <!-- SALA I -->
+    <!-- =========================
+         SALA I
+    ========================= -->
 
-    <a class="sala" href="sala-maure.html">
+    <a
+      class="sala"
+      href="sala-maure.html"
+    >
 
       <div class="imagen">
 
         <img
           src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Nuestro_Padre_Jes%C3%BAs_de_la_Salud_en_sus_Tres_Ca%C3%ADdas._Jerez_de_la_Frontera.jpg/960px-Nuestro_Padre_Jes%C3%BAs_de_la_Salud_en_sus_Tres_Ca%C3%ADdas._Jerez_de_la_Frontera.jpg?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
-          alt="Nuestro Padre Jesús de la Salud en sus Tres Caídas">
+          alt="Nuestro Padre Jesús de la Salud en sus Tres Caídas"
+        >
 
       </div>
 
+
       <div class="texto">
 
-        <span class="numero">SALA I</span>
+        <span class="numero">
+          SALA I
+        </span>
 
-        <h2>Maure</h2>
+        <h2>
+          Maure
+        </h2>
 
-        <p>Hermandad de las Tres Caídas</p>
+        <p>
+          Hermandad de las Tres Caídas
+        </p>
 
       </div>
 
     </a>
 
 
-    <!-- SALA II -->
+    <!-- =========================
+         SALA II
+    ========================= -->
 
-    <a class="sala" href="sala-jose-blas.html">
+    <a
+      class="sala"
+      href="sala-jose-blas.html"
+    >
 
       <div class="imagen">
 
         <img
           src="https://coronacionjerez.com/wp-content/uploads/2024/12/006-Besamanos-Amargura-jerezcofrade-Javier-Romero-Diaz-768x513-1.jpeg"
-          alt="Hermandad de la Amargura">
+          alt="Hermandad de la Amargura"
+        >
 
       </div>
 
+
       <div class="texto">
 
-        <span class="numero">SALA II</span>
+        <span class="numero">
+          SALA II
+        </span>
 
-        <h2>José Blas</h2>
+        <h2>
+          José Blas
+        </h2>
 
-        <p>Hermandad de la Amargura</p>
+        <p>
+          Hermandad de la Amargura
+        </p>
 
       </div>
 
     </a>
 
 
-    <!-- SALA III -->
+    <!-- =========================
+         SALA III — ANDRÉS CAÑADAS
+    ========================= -->
 
-   
-    <a href="sala-andres-canadas.html" class="tarjeta">
+    <a
+      class="sala"
+      href="sala-andres-canadas.html"
+    >
 
-  <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/12/1-9.jpg">
+      <div class="imagen">
 
-  <div class="texto">
-    <h2>Andrés Cañadas</h2>
-    <p>Semana Santa de Jerez · 2007</p>
-  </div>
+        <img
+          src="https://www.uniondehermandades.com/wp-content/uploads/2018/12/1-9.jpg"
+          alt="Andrés Cañadas"
+        >
 
-</a>
+      </div>
 
 
-    <!-- SALA IV -->
+      <div class="texto">
 
-    <a class="sala" href="sala-antonio-gallardo.html">
+        <span class="numero">
+          SALA III
+        </span>
+
+        <h2>
+          Andrés Cañadas
+        </h2>
+
+        <p>
+          Semana Santa de Jerez · 2007
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <!-- =========================
+         SALA IV
+    ========================= -->
+
+    <a
+      class="sala"
+      href="sala-antonio-gallardo.html"
+    >
 
       <div class="imagen">
 
         <img
           src="https://www.hermandaddelasoledad.org/wp-content/uploads/2024/03/besamanos-maria-santisima-en-su-soledad.jpg"
-          alt="Hermandad de la Soledad">
+          alt="Hermandad de la Soledad"
+        >
 
       </div>
 
+
       <div class="texto">
 
-        <span class="numero">SALA IV</span>
+        <span class="numero">
+          SALA IV
+        </span>
 
-        <h2>Antonio Gallardo</h2>
+        <h2>
+          Antonio Gallardo
+        </h2>
 
-        <p>Hermandad de la Soledad</p>
+        <p>
+          Hermandad de la Soledad
+        </p>
 
       </div>
 
@@ -354,7 +561,9 @@
   </main>
 
 
-  <!-- REPRODUCTOR OCULTO -->
+  <!-- =========================
+       REPRODUCTOR OCULTO
+  ========================= -->
 
   <div class="youtube">
 
@@ -362,23 +571,37 @@
       id="youtubePlayer"
       width="1"
       height="1"
+
       src="https://www.youtube.com/embed/LskXL1XOcqA?autoplay=1&loop=1&playlist=LskXL1XOcqA"
+
       title="Música del museo"
+
       frameborder="0"
+
       allow="autoplay; encrypted-media">
     </iframe>
 
   </div>
 
 
-  <!-- BOTÓN DE MÚSICA -->
+  <!-- =========================
+       BOTÓN DE MÚSICA
+  ========================= -->
 
-  <button class="musica" onclick="controlarMusica()" title="Música">
+  <button
+    class="musica"
+    onclick="controlarMusica()"
+    title="Música"
+  >
+
     ♪
+
   </button>
 
 
-  <!-- PIE -->
+  <!-- =========================
+       PIE
+  ========================= -->
 
   <footer>
 
@@ -387,13 +610,20 @@
   </footer>
 
 
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
   <script>
 
     let sonando = true;
 
+
     function controlarMusica() {
 
-      const player = document.getElementById("youtubePlayer");
+      const player =
+        document.getElementById("youtubePlayer");
+
 
       if (sonando) {
 
@@ -402,7 +632,9 @@
 
         sonando = false;
 
-      } else {
+      }
+
+      else {
 
         player.src =
           "https://www.youtube.com/embed/LskXL1XOcqA?autoplay=1&loop=1&playlist=LskXL1XOcqA";
@@ -417,5 +649,7 @@
 
 
 </body>
+
 </html>
+```
 
