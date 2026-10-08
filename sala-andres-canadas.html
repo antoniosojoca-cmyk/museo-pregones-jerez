@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sala III — Andrés Cañadas</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #080808;
+      color: #f5f0e6;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow: hidden;
+    }
+
+    .sala {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.55);
+    }
+
+    .velo {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.25),
+          rgba(0,0,0,0.45) 45%,
+          rgba(0,0,0,0.88)
+        );
+    }
+
+    .contenido {
+      position: absolute;
+      left: 50%;
+      bottom: 13%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1000px;
+      text-align: center;
+      text-shadow: 0 3px 12px #000;
+    }
+
+    .sala-numero {
+      color: #c9a24d;
+      font-size: 18px;
+      letter-spacing: 5px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 58px);
+      color: #d4af55;
+      font-weight: normal;
+    }
+
+    h2 {
+      margin: 0 0 25px;
+      font-size: clamp(20px, 3vw, 34px);
+      font-weight: normal;
+    }
+
+    .escuchar {
+      border: 1px solid #c9a24d;
+      background: rgba(0,0,0,0.65);
+      color: #e2c46b;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .escuchar:hover {
+      background: #c9a24d;
+      color: #080808;
+    }
+
+    .flecha {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 70px;
+      border: none;
+      background: rgba(0,0,0,0.25);
+      color: #d4af55;
+      font-size: 45px;
+      cursor: pointer;
+      z-index: 10;
+      transition: 0.3s;
+    }
+
+    .flecha:hover {
+      background: rgba(0,0,0,0.65);
+    }
+
+    .izquierda {
+      left: 15px;
+    }
+
+    .derecha {
+      right: 15px;
+    }
+
+    .puntos {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .punto {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #d4af55;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .punto.active {
+      background: #d4af55;
+    }
+
+    .volver {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      z-index: 20;
+      color: #d4af55;
+      text-decoration: none;
+      border: 1px solid rgba(212,175,85,0.7);
+      background: rgba(0,0,0,0.55);
+      padding: 9px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .volver:hover {
+      background: #d4af55;
+      color: #080808;
+    }
+
+    .musica {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      z-index: 20;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid #c9a24d;
+      background: rgba(0,0,0,0.65);
+      color: #d4af55;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .youtube {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      left: -10px;
+      top: -10px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .contenido {
+        bottom: 15%;
+      }
+
+      .flecha {
+        width: 38px;
+        font-size: 32px;
+      }
+
+      .volver {
+        top: 15px;
+        left: 15px;
+      }
+
+      .musica {
+        top: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sala">
+
+    <!-- FRAGMENTO 1 -->
+    <div class="slide active">
+      <img src="https://static.grupojoly.com/clip/b3ddbe53-7892-431d-834f-213cb26feb1b_16-9-aspect-ratio_1200w_1011885.webp">
+      <div class="velo"></div>
+
+      <div class="contenido">
+        <div class="sala-numero">SALA III</div>
+        <h1>Andrés Cañadas</h1>
+        <h2>Semana Santa de Jerez</h2>
+        <button class="escuchar" onclick="escucharFragmento(0)">
+          ▶ Escuchar fragmento
+        </button>
+      </div>
+    </div>
+
+    <!-- FRAGMENTO 2 -->
+    <div class="slide">
+      <img src="https://hermandaddeltransporte.com/wp-content/uploads/2022/11/img_20201101_105436_576.jpg">
+      <div class="velo"></div>
+
+      <div class="contenido">
+        <div class="sala-numero">SALA III</div>
+        <h1>Andrés Cañadas</h1>
+        <h2>Entrega</h2>
+        <button class="escuchar" onclick="escucharFragmento(1)">
+          ▶ Escuchar fragmento
+        </button>
+      </div>
+    </div>
+
+    <!-- FRAGMENTO 3 -->
+    <div class="slide">
+      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/11/1-21.jpg">
+      <div class="velo"></div>
+
+      <div class="contenido">
+        <div class="sala-numero">SALA III</div>
+        <h1>Andrés Cañadas</h1>
+        <h2>Domingo de Ramos</h2>
+        <button class="escuchar" onclick="escucharFragmento(2)">
+          ▶ Escuchar fragmento
+        </button>
+      </div>
+    </div>
+
+    <!-- FRAGMENTO 4 -->
+    <div class="slide">
+      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/11/1-24.jpg">
+      <div class="velo"></div>
+
+      <div class="contenido">
+        <div class="sala-numero">SALA III</div>
+        <h1>Andrés Cañadas</h1>
+        <h2>Martes Santo</h2>
+        <button class="escuchar" onclick="escucharFragmento(3)">
+          ▶ Escuchar fragmento
+        </button>
+      </div>
+    </div>
+
+    <!-- FRAGMENTO 5 -->
+    <div class="slide">
+      <img src="https://www.veracruzjerez.es/wp-content/uploads/2025/11/Foto-Cristo-de-la-Esperanza-06-11-25-3-980x735.jpg">
+      <div class="velo"></div>
+
+      <div class="contenido">
+        <div class="sala-numero">SALA III</div>
+        <h1>Andrés Cañadas</h1>
+        <h2>Miércoles Santo</h2>
+        <button class="escuchar" onclick="escucharFragmento(4)">
+          ▶ Escuchar fragmento
+        </button>
+      </div>
+    </div>
+
+    <!-- FRAGMENTO 6 -->
+    <div class="slide">
+      <img src="https://www.youtube.com/">
+      <div class="velo"></div>
+
+      <div class="contenido">
+        <div class="sala-numero">SALA III</div>
+        <h1>Andrés Cañadas</h1>
+        <h2>Jueves Santo</h2>
+        <button class="escuchar" onclick="escucharFragmento(5)">
+          ▶ Escuchar fragmento
+        </button>
+      </div>
+    </div>
+
+    <button class="flecha izquierda" onclick="cambiarSlide(-1)">‹</button>
+    <button class="flecha derecha" onclick="cambiarSlide(1)">›</button>
+
+    <div class="puntos">
+      <button class="punto active" onclick="irSlide(0)"></button>
+      <button class="punto" onclick="irSlide(1)"></button>
+      <button class="punto" onclick="irSlide(2)"></button>
+      <button class="punto" onclick="irSlide(3)"></button>
+      <button class="punto" onclick="irSlide(4)"></button>
+      <button class="punto" onclick="irSlide(5)"></button>
+    </div>
+
+    <a href="index.html" class="volver">← Volver al museo</a>
+
+    <button class="musica" onclick="toggleMusica()" title="Música">
+      ♪
+    </button>
+
+    <!-- REPRODUCTOR DEL PREGÓN -->
+    <div id="pregón" class="youtube">
+      <div id="player"></div>
+    </div>
+
+    <!-- REPRODUCTOR DE MÚSICA -->
+    <div id="musicaYT" class="youtube">
+      <div id="musicPlayer"></div>
+    </div>
+
+  </div>
+
+  <script>
+
+    const fragmentos = [
+      { inicio: 1364, fin: 1427 },
+      { inicio: 1770, fin: 1835 },
+      { inicio: 2451, fin: 2534 },
+      { inicio: 3478, fin: 3530 },
+      { inicio: 4068, fin: 4153 },
+      { inicio: 4648, fin: 4700 }
+    ];
+
+    let slides = document.querySelectorAll(".slide");
+    let puntos = document.querySelectorAll(".punto");
+
+    let actual = 0;
+    let player;
+    let musicPlayer;
+    let intervalo;
+
+    let apiCargada = false;
+
+    function onYouTubeIframeAPIReady() {
+
+      player = new YT.Player("player", {
+        height: "1",
+        width: "1",
+        videoId: "zbobklPPeNA",
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1
+        }
+      });
+
+      musicPlayer = new YT.Player("musicPlayer", {
+        height: "1",
+        width: "1",
+        videoId: "AK8Te1T8WD8",
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1
+        },
+        events: {
+          onReady: function(event) {
+            event.target.setVolume(8);
+          }
+        }
+      });
+
+      apiCargada = true;
+    }
+
+    function escucharFragmento(indice) {
+
+      if (!apiCargada || !player) {
+        alert("Espera unos segundos a que cargue el reproductor.");
+        return;
+      }
+
+      const fragmento = fragmentos[indice];
+
+      clearInterval(intervalo);
+
+      player.loadVideoById({
+        videoId: "zbobklPPeNA",
+        startSeconds: fragmento.inicio
+      });
+
+      player.playVideo();
+
+      intervalo = setInterval(function() {
+
+        if (player && player.getCurrentTime) {
+
+          const tiempo = player.getCurrentTime();
+
+          if (tiempo >= fragmento.fin) {
+            player.pauseVideo();
+            clearInterval(intervalo);
+          }
+
+        }
+
+      }, 500);
+    }
+
+    function cambiarSlide(direccion) {
+
+      slides[actual].classList.remove("active");
+      puntos[actual].classList.remove("active");
+
+      actual += direccion;
+
+      if (actual < 0) {
+        actual = slides.length - 1;
+      }
+
+      if (actual >= slides.length) {
+        actual = 0;
+      }
+
+      slides[actual].classList.add("active");
+      puntos[actual].classList.add("active");
+    }
+
+    function irSlide(numero) {
+
+      slides[actual].classList.remove("active");
+      puntos[actual].classList.remove("active");
+
+      actual = numero;
+
+      slides[actual].classList.add("active");
+      puntos[actual].classList.add("active");
+    }
+
+    let musicaActiva = false;
+
+    function toggleMusica() {
+
+      if (!musicPlayer) {
+        return;
+      }
+
+      if (!musicaActiva) {
+        musicPlayer.playVideo();
+        musicaActiva = true;
+      } else {
+        musicPlayer.pauseVideo();
+        musicaActiva = false;
+      }
+    }
+
+    </script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+</html>
+
