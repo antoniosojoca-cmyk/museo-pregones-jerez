@@ -1,17 +1,14 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Sala III — Andrés Cañadas</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -52,13 +49,12 @@
     .velo {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,0.25),
-          rgba(0,0,0,0.45) 45%,
-          rgba(0,0,0,0.88)
-        );
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2),
+        rgba(0,0,0,0.4) 45%,
+        rgba(0,0,0,0.88)
+      );
     }
 
     .contenido {
@@ -94,14 +90,13 @@
 
     .escuchar {
       border: 1px solid #c9a24d;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.7);
       color: #e2c46b;
       padding: 12px 25px;
       border-radius: 4px;
       cursor: pointer;
       font-family: Georgia, serif;
       font-size: 16px;
-      transition: 0.3s;
     }
 
     .escuchar:hover {
@@ -121,20 +116,14 @@
       font-size: 45px;
       cursor: pointer;
       z-index: 10;
-      transition: 0.3s;
     }
 
     .flecha:hover {
       background: rgba(0,0,0,0.65);
     }
 
-    .izquierda {
-      left: 15px;
-    }
-
-    .derecha {
-      right: 15px;
-    }
+    .izquierda { left: 15px; }
+    .derecha { right: 15px; }
 
     .puntos {
       position: absolute;
@@ -153,11 +142,10 @@
       border: 1px solid #d4af55;
       background: transparent;
       cursor: pointer;
+      padding: 0;
     }
 
-    .punto.active {
-      background: #d4af55;
-    }
+    .punto.active { background: #d4af55; }
 
     .volver {
       position: absolute;
@@ -167,7 +155,7 @@
       color: #d4af55;
       text-decoration: none;
       border: 1px solid rgba(212,175,85,0.7);
-      background: rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.65);
       padding: 9px 16px;
       border-radius: 4px;
       font-size: 14px;
@@ -187,7 +175,7 @@
       height: 42px;
       border-radius: 50%;
       border: 1px solid #c9a24d;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.7);
       color: #d4af55;
       cursor: pointer;
       font-size: 18px;
@@ -204,154 +192,106 @@
     }
 
     @media (max-width: 700px) {
-      .contenido {
-        bottom: 15%;
-      }
-
-      .flecha {
-        width: 38px;
-        font-size: 32px;
-      }
-
-      .volver {
-        top: 15px;
-        left: 15px;
-      }
-
-      .musica {
-        top: 15px;
-        right: 15px;
-      }
+      .contenido { bottom: 15%; }
+      .flecha { width: 38px; font-size: 32px; }
+      .volver { top: 15px; left: 15px; }
+      .musica { top: 15px; right: 15px; }
     }
   </style>
 </head>
 
 <body>
-
   <div class="sala">
 
-    <!-- FRAGMENTO 1 -->
     <div class="slide active">
-      <img src="https://static.grupojoly.com/clip/7be05118-450c-46f9-a132-4168fc6c7bf6_source-aspect-ratio_1600w_0.webp">
+      <img src="https://static.grupojoly.com/clip/b3ddbe53-7892-431d-834f-213cb26feb1b_16-9-aspect-ratio_1200w_1011885.webp" alt="Semana Santa de Jerez">
       <div class="velo"></div>
-
       <div class="contenido">
         <div class="sala-numero">SALA III</div>
         <h1>Andrés Cañadas</h1>
         <h2>Semana Santa de Jerez</h2>
-        <button class="escuchar" onclick="escucharFragmento(0)">
-          ▶ Escuchar fragmento
-        </button>
+        <button class="escuchar" onclick="escucharFragmento(0)">▶ Escuchar fragmento</button>
       </div>
     </div>
 
-    <!-- FRAGMENTO 2 -->
     <div class="slide">
-      <img src="https://static.grupojoly.com/clip/b3ddbe53-7892-431d-834f-213cb26feb1b_16-9-aspect-ratio_1200w_1011885.webp">
+      <img src="https://hermandaddeltransporte.com/wp-content/uploads/2022/11/img_20201101_105436_576.jpg" alt="Entrega">
       <div class="velo"></div>
-
       <div class="contenido">
         <div class="sala-numero">SALA III</div>
         <h1>Andrés Cañadas</h1>
         <h2>Entrega</h2>
-        <button class="escuchar" onclick="escucharFragmento(1)">
-          ▶ Escuchar fragmento
-        </button>
+        <button class="escuchar" onclick="escucharFragmento(1)">▶ Escuchar fragmento</button>
       </div>
     </div>
 
-    <!-- FRAGMENTO 3 -->
     <div class="slide">
-      <img src="https://hermandaddeltransporte.com/wp-content/uploads/2022/11/img_20201101_105436_576.jpg">
+      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/11/1-21.jpg" alt="Domingo de Ramos">
       <div class="velo"></div>
-
       <div class="contenido">
         <div class="sala-numero">SALA III</div>
         <h1>Andrés Cañadas</h1>
         <h2>Domingo de Ramos</h2>
-        <button class="escuchar" onclick="escucharFragmento(2)">
-          ▶ Escuchar fragmento
-        </button>
+        <button class="escuchar" onclick="escucharFragmento(2)">▶ Escuchar fragmento</button>
       </div>
     </div>
 
-    <!-- FRAGMENTO 4 -->
     <div class="slide">
-      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/11/1-21.jpg">
+      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/11/1-24.jpg" alt="Martes Santo">
       <div class="velo"></div>
-
       <div class="contenido">
         <div class="sala-numero">SALA III</div>
         <h1>Andrés Cañadas</h1>
         <h2>Martes Santo</h2>
-        <button class="escuchar" onclick="escucharFragmento(3)">
-          ▶ Escuchar fragmento
-        </button>
+        <button class="escuchar" onclick="escucharFragmento(3)">▶ Escuchar fragmento</button>
       </div>
     </div>
 
-    <!-- FRAGMENTO 5 -->
     <div class="slide">
-      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/11/1-24.jpg">
+      <img src="https://www.veracruzjerez.es/wp-content/uploads/2025/11/Foto-Cristo-de-la-Esperanza-06-11-25-3-980x735.jpg" alt="Miércoles Santo">
       <div class="velo"></div>
-
       <div class="contenido">
         <div class="sala-numero">SALA III</div>
         <h1>Andrés Cañadas</h1>
         <h2>Miércoles Santo</h2>
-        <button class="escuchar" onclick="escucharFragmento(4)">
-          ▶ Escuchar fragmento
-        </button>
+        <button class="escuchar" onclick="escucharFragmento(4)">▶ Escuchar fragmento</button>
       </div>
     </div>
 
-    <!-- FRAGMENTO 6 -->
     <div class="slide">
-      <img src="https://www.veracruzjerez.es/wp-content/uploads/2025/11/Foto-Cristo-de-la-Esperanza-06-11-25-3-980x735.jpg">
+      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/12/1-6.jpg" alt="Jueves Santo">
       <div class="velo"></div>
-
       <div class="contenido">
         <div class="sala-numero">SALA III</div>
         <h1>Andrés Cañadas</h1>
         <h2>Jueves Santo</h2>
-        <button class="escuchar" onclick="escucharFragmento(5)">
-          ▶ Escuchar fragmento
-        </button>
+        <button class="escuchar" onclick="escucharFragmento(5)">▶ Escuchar fragmento</button>
       </div>
     </div>
 
-    <button class="flecha izquierda" onclick="cambiarSlide(-1)">‹</button>
-    <button class="flecha derecha" onclick="cambiarSlide(1)">›</button>
+    <button class="flecha izquierda" onclick="cambiarSlide(-1)" aria-label="Imagen anterior">‹</button>
+    <button class="flecha derecha" onclick="cambiarSlide(1)" aria-label="Imagen siguiente">›</button>
 
     <div class="puntos">
-      <button class="punto active" onclick="irSlide(0)"></button>
-      <button class="punto" onclick="irSlide(1)"></button>
-      <button class="punto" onclick="irSlide(2)"></button>
-      <button class="punto" onclick="irSlide(3)"></button>
-      <button class="punto" onclick="irSlide(4)"></button>
-      <button class="punto" onclick="irSlide(5)"></button>
+      <button class="punto active" onclick="irSlide(0)" aria-label="Fragmento 1"></button>
+      <button class="punto" onclick="irSlide(1)" aria-label="Fragmento 2"></button>
+      <button class="punto" onclick="irSlide(2)" aria-label="Fragmento 3"></button>
+      <button class="punto" onclick="irSlide(3)" aria-label="Fragmento 4"></button>
+      <button class="punto" onclick="irSlide(4)" aria-label="Fragmento 5"></button>
+      <button class="punto" onclick="irSlide(5)" aria-label="Fragmento 6"></button>
     </div>
 
     <a href="index.html" class="volver">← Volver al museo</a>
+    <button class="musica" onclick="toggleMusica()" title="Activar o pausar música">♪</button>
 
-    <button class="musica" onclick="toggleMusica()" title="Música">
-      ♪
-    </button>
-
-    <!-- REPRODUCTOR DEL PREGÓN -->
-    <div id="pregón" class="youtube">
+    <div class="youtube">
       <div id="player"></div>
-    </div>
-
-    <!-- REPRODUCTOR DE MÚSICA -->
-    <div id="musicaYT" class="youtube">
       <div id="musicPlayer"></div>
     </div>
 
   </div>
 
   <script>
-
     const fragmentos = [
       { inicio: 1364, fin: 1427 },
       { inicio: 1770, fin: 1835 },
@@ -361,18 +301,17 @@
       { inicio: 4648, fin: 4700 }
     ];
 
-    let slides = document.querySelectorAll(".slide");
-    let puntos = document.querySelectorAll(".punto");
+    const slides = document.querySelectorAll(".slide");
+    const puntos = document.querySelectorAll(".punto");
 
     let actual = 0;
-    let player;
-    let musicPlayer;
-    let intervalo;
-
+    let player = null;
+    let musicPlayer = null;
+    let intervalo = null;
+    let musicaActiva = false;
     let apiCargada = false;
 
     function onYouTubeIframeAPIReady() {
-
       player = new YT.Player("player", {
         height: "1",
         width: "1",
@@ -380,8 +319,7 @@
         playerVars: {
           autoplay: 0,
           controls: 0,
-          rel: 0,
-          modestbranding: 1
+          rel: 0
         }
       });
 
@@ -392,8 +330,7 @@
         playerVars: {
           autoplay: 0,
           controls: 0,
-          rel: 0,
-          modestbranding: 1
+          rel: 0
         },
         events: {
           onReady: function(event) {
@@ -406,76 +343,76 @@
     }
 
     function escucharFragmento(indice) {
-
       if (!apiCargada || !player) {
-        alert("Espera unos segundos a que cargue el reproductor.");
+        alert("Espera unos segundos a que cargue el reproductor y vuelve a pulsar.");
         return;
       }
 
-      const fragmento = fragmentos[indice];
-
       clearInterval(intervalo);
+
+      actual = indice;
+      mostrarSlide(actual);
+
+      const fragmento = fragmentos[indice];
 
       player.loadVideoById({
         videoId: "zbobklPPeNA",
         startSeconds: fragmento.inicio
       });
 
-      player.playVideo();
-
       intervalo = setInterval(function() {
+        if (!player || typeof player.getCurrentTime !== "function") return;
 
-        if (player && player.getCurrentTime) {
+        const tiempo = player.getCurrentTime();
 
-          const tiempo = player.getCurrentTime();
+        if (tiempo >= fragmento.fin) {
+          clearInterval(intervalo);
+          intervalo = null;
+          player.pauseVideo();
 
-          if (tiempo >= fragmento.fin) {
-            player.pauseVideo();
-            clearInterval(intervalo);
-          }
-
+          // AL TERMINAR EL FRAGMENTO, AVANZA AUTOMÁTICAMENTE
+          cambiarSlide(1);
         }
+      }, 250);
+    }
 
-      }, 500);
+    function mostrarSlide(numero) {
+      slides.forEach(function(slide, i) {
+        slide.classList.toggle("active", i === numero);
+      });
+
+      puntos.forEach(function(punto, i) {
+        punto.classList.toggle("active", i === numero);
+      });
+
+      actual = numero;
     }
 
     function cambiarSlide(direccion) {
+      clearInterval(intervalo);
+      intervalo = null;
 
-      slides[actual].classList.remove("active");
-      puntos[actual].classList.remove("active");
-
-      actual += direccion;
-
-      if (actual < 0) {
-        actual = slides.length - 1;
+      if (player && typeof player.pauseVideo === "function") {
+        player.pauseVideo();
       }
 
-      if (actual >= slides.length) {
-        actual = 0;
-      }
-
-      slides[actual].classList.add("active");
-      puntos[actual].classList.add("active");
+      actual = (actual + direccion + slides.length) % slides.length;
+      mostrarSlide(actual);
     }
 
     function irSlide(numero) {
+      clearInterval(intervalo);
+      intervalo = null;
 
-      slides[actual].classList.remove("active");
-      puntos[actual].classList.remove("active");
+      if (player && typeof player.pauseVideo === "function") {
+        player.pauseVideo();
+      }
 
-      actual = numero;
-
-      slides[actual].classList.add("active");
-      puntos[actual].classList.add("active");
+      mostrarSlide(numero);
     }
 
-    let musicaActiva = false;
-
     function toggleMusica() {
-
-      if (!musicPlayer) {
-        return;
-      }
+      if (!musicPlayer) return;
 
       if (!musicaActiva) {
         musicPlayer.playVideo();
@@ -485,11 +422,10 @@
         musicaActiva = false;
       }
     }
+  </script>
 
-    </script>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-
+  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
+
 
