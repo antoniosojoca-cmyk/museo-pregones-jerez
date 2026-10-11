@@ -1,213 +1,225 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sala IV — Antonio Gallardo</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: #080808;
-  color: #f5f0e5;
+  background: #050505;
+  color: #fff;
   font-family: Georgia, "Times New Roman", serif;
 }
 
 header {
   text-align: center;
-  padding: 38px 20px 24px;
-  background: linear-gradient(#1b1711, #080808);
-  border-bottom: 1px solid #9b793b;
+  padding: 17px 10px 18px;
 }
 
 header h1 {
-  color: #d5b36b;
-  font-size: clamp(27px, 4vw, 42px);
-  margin: 0 0 12px;
-  letter-spacing: 1px;
+  margin: 0;
+  color: #d8ad24;
+  font-size: clamp(27px, 3.5vw, 39px);
+  font-weight: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 header p {
-  color: #e4d7bd;
-  font-size: 17px;
-  margin: 0;
+  margin: 5px 0 0;
+  color: #f0dfb5;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
 
-main {
-  max-width: 1100px;
-  margin: auto;
-  padding: 28px 18px 45px;
-}
-
-.introduccion {
-  text-align: center;
-  max-width: 780px;
-  margin: 0 auto 28px;
-  line-height: 1.7;
-  color: #e1d6c3;
-}
-
-.reproductor {
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  left: -10000px;
-}
-
-.visor {
+.sala {
   position: relative;
-  max-width: 900px;
+  width: 92%;
+  max-width: 1600px;
+  height: min(72vh, 650px);
+  min-height: 430px;
   margin: 0 auto;
-  background: #000;
-  border: 1px solid #80632e;
-  box-shadow: 0 0 28px #000;
+  border: 1px solid #5c4916;
   overflow: hidden;
+  background: #080808;
 }
 
-.foto {
+.pieza {
   display: none;
-  position: relative;
+  position: absolute;
+  inset: 0;
+  background: #080808;
 }
 
-.foto.activa {
-  display: block;
-}
+.pieza.activa { display: block; }
 
-.foto img {
-  display: block;
+.pieza img {
   width: 100%;
-  height: clamp(300px, 60vw, 570px);
-  object-fit: contain;
-  background: #050505;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
-.texto-foto {
-  padding: 20px 16px;
+.pieza::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.03) 40%,
+    rgba(0,0,0,.2) 58%,
+    rgba(0,0,0,.88) 100%
+  );
+  pointer-events: none;
+}
+
+.rotulo {
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: 65px;
+  right: 65px;
   text-align: center;
-  background: linear-gradient(#17130e, #080808);
+  text-shadow: 0 2px 7px #000;
 }
 
-.texto-foto h2 {
-  color: #d5b36b;
-  font-size: clamp(23px, 3vw, 31px);
-  margin: 0 0 9px;
+.rotulo .numero {
+  margin: 0 0 7px;
+  color: #e0b72c;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.texto-foto p {
+.rotulo h2 {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: clamp(23px, 2.4vw, 32px);
+  font-weight: normal;
+}
+
+.rotulo p {
   margin: 0;
-  color: #e5dac7;
-  font-size: 16px;
+  color: #f2e4ca;
+  font-size: 15px;
+  font-style: italic;
 }
 
 .flecha {
   position: absolute;
-  top: 36%;
   z-index: 5;
-  border: 1px solid #d5b36b;
-  color: #f5e5c0;
-  background: rgba(0,0,0,.72);
-  width: 45px;
-  height: 55px;
-  font-size: 28px;
+  top: 45%;
+  border: 0;
+  padding: 8px;
+  background: transparent;
+  color: #e0b321;
+  font-size: 34px;
   cursor: pointer;
 }
 
-.flecha:hover,
-.boton:hover {
-  background: #9b793b;
-  color: #080808;
-}
-
-.anterior {
-  left: 12px;
-}
-
-.siguiente {
-  right: 12px;
-}
+.flecha:hover { color: white; }
+.anterior { left: 10px; }
+.siguiente { right: 10px; }
 
 .puntos {
   display: flex;
   justify-content: center;
-  gap: 11px;
-  padding: 19px 10px 5px;
+  align-items: center;
+  gap: 9px;
+  margin: 17px 0 10px;
 }
 
 .punto {
   width: 12px;
-  height: 12px;
-  border: 1px solid #d5b36b;
+  height: 9px;
+  border: 1px solid #d8ad24;
   border-radius: 50%;
+  padding: 0;
   background: transparent;
   cursor: pointer;
 }
 
 .punto.activo {
-  background: #d5b36b;
+  background: #d8ad24;
+  box-shadow: 0 0 7px #d8ad24;
 }
 
 .controles {
   text-align: center;
-  padding: 24px 10px 10px;
+  padding: 5px 12px 12px;
 }
 
 .boton {
-  border: 1px solid #b89754;
-  background: #17130e;
-  color: #e8d4a5;
-  padding: 12px 19px;
-  margin: 5px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  cursor: pointer;
-  text-decoration: none;
   display: inline-block;
+  margin: 4px;
+  padding: 9px 16px;
+  color: #e0b321;
+  background: #080808;
+  border: 1px solid #80651c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.estado {
-  color: #c7b99f;
-  font-size: 14px;
-  min-height: 24px;
-  margin-top: 10px;
+.boton:hover {
+  color: #fff;
+  border-color: #e0b321;
+}
+
+#estado {
+  min-height: 20px;
+  margin: 8px 0;
+  color: #c7b990;
+  font-size: 13px;
 }
 
 .volver {
   text-align: center;
-  margin-top: 35px;
+  margin: 8px 0 18px;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid #493a23;
-  color: #a99a80;
-  font-size: 13px;
+.volver a {
+  color: #e0b321;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-size: 14px;
 }
 
-@media (max-width: 600px) {
-  main {
-    padding: 20px 10px 35px;
+.volver a:hover { color: white; }
+
+.reproductor-oculto {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .sala {
+    width: 96%;
+    height: 65vh;
+    min-height: 400px;
   }
 
-  .foto img {
-    height: 340px;
+  .pieza img { object-fit: contain; }
+
+  .rotulo {
+    left: 38px;
+    right: 38px;
+    bottom: 18px;
   }
 
-  .flecha {
-    width: 36px;
-    height: 45px;
-    font-size: 23px;
-  }
-
-  .anterior { left: 5px; }
-  .siguiente { right: 5px; }
+  .flecha { font-size: 27px; }
+  header p { font-size: 13px; }
 }
 </style>
 </head>
@@ -216,113 +228,97 @@ footer {
 
 <header>
   <h1>Sala IV — Antonio Gallardo</h1>
-  <p>El pregón de la Semana Santa de Jerez</p>
+  <p>Seis momentos de un pregón · Seis miradas de la Semana Santa de Jerez</p>
 </header>
 
 <main>
+  <section class="sala" id="sala">
 
-  <section class="introduccion">
-    <p>
-      Una sala dedicada a la palabra, la emoción y la devoción cofrade.
-      Seis fragmentos del pregón nos acercan a distintas imágenes y
-      hermandades de nuestra Semana Santa jerezana.
-    </p>
-    <p>
-      Selecciona cada fragmento para escuchar sus palabras y contemplar
-      la fotografía correspondiente.
-    </p>
-  </section>
-
-  <div class="reproductor">
-    <div id="pregón"></div>
-  </div>
-
-  <section class="visor">
-
-    <article class="foto activa">
-      <img
-        src="https://www.jerez.es/fileadmin/_processed_/8/5/csm_titular2mayordolor_891c1580a1.jpg"
-        alt="Nuestra Señora del Mayor Dolor">
-      <div class="texto-foto">
-        <h2>I. Mayor Dolor</h2>
-        <p>La emoción y el recogimiento ante la Madre del Mayor Dolor.</p>
+    <article class="pieza activa">
+      <img src="https://www.jerez.es/fileadmin/_processed_/8/5/csm_titular2mayordolor_891c1580a1.jpg"
+           alt="Nuestra Señora del Mayor Dolor">
+      <div class="rotulo">
+        <p class="numero">I · Mayor Dolor</p>
+        <h2>Nuestra Señora del Mayor Dolor</h2>
+        <p>Primer momento del pregón</p>
       </div>
     </article>
 
-    <article class="foto">
-      <img
-        src="https://www.hermandaddeldesconsuelo.es/wp-content/uploads/2016/10/4.png"
-        alt="Nuestra Señora del Desconsuelo">
-      <div class="texto-foto">
-        <h2>II. Desconsuelo</h2>
-        <p>La devoción a la Virgen del Desconsuelo.</p>
+    <article class="pieza">
+      <img src="https://www.hermandaddeldesconsuelo.es/wp-content/uploads/2016/10/4.png"
+           alt="Nuestra Señora del Desconsuelo">
+      <div class="rotulo">
+        <p class="numero">II · Desconsuelo</p>
+        <h2>Nuestra Señora del Desconsuelo</h2>
+        <p>Segundo momento del pregón</p>
       </div>
     </article>
 
-    <article class="foto">
-      <img
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1g7sXbiNOfrLTM2-gD-X4pJzlSjv9gFJANhGW70dJJDOv2v0r8CApEkxKcw0D612koIBD3HnkT07EL_nsXyEmQOLaSHK-vTJUC3BOvuLD1Ec9CZmM9lB__swziBO51M69hQQhtlShqvo/s640/remediosprendi11.jpg"
-        alt="Virgen de los Remedios">
-      <div class="texto-foto">
-        <h2>III. Remedios</h2>
-        <p>La mirada de la Virgen de los Remedios, memoria viva de Jerez.</p>
+    <article class="pieza">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1g7sXbiNOfrLTM2-gD-X4pJzlSjv9gFJANhGW70dJJDOv2v0r8CApEkxKcw0D612koIBD3HnkT07EL_nsXyEmQOLaSHK-vTJUC3BOvuLD1Ec9CZmM9lB__swziBO51M69hQQhtlShqvo/s640/remediosprendi11.jpg"
+           alt="Virgen de los Remedios">
+      <div class="rotulo">
+        <p class="numero">III · Remedios</p>
+        <h2>Virgen de los Remedios</h2>
+        <p>Tercer momento del pregón</p>
       </div>
     </article>
 
-    <article class="foto">
-      <img
-        src="https://coronacionjerez.com/wp-content/uploads/2022/07/corona-1-600x800-1.jpg"
-        alt="Hermandad de la Coronación">
-      <div class="texto-foto">
-        <h2>IV. Coronación</h2>
-        <p>La fe y la historia de la Hermandad de la Coronación.</p>
+    <article class="pieza">
+      <img src="https://coronacionjerez.com/wp-content/uploads/2022/07/corona-1-600x800-1.jpg"
+           alt="Hermandad de la Coronación">
+      <div class="rotulo">
+        <p class="numero">IV · Coronación</p>
+        <h2>La Coronación</h2>
+        <p>Cuarto momento del pregón</p>
       </div>
     </article>
 
-    <article class="foto">
-      <img
-        src="https://www.uniondehermandades.com/wp-content/uploads/2018/12/2-10.jpg"
-        alt="Cristo de la Buena Muerte">
-      <div class="texto-foto">
-        <h2>V. Buena Muerte</h2>
-        <p>Silencio, oración y respeto ante el misterio de la Buena Muerte.</p>
+    <article class="pieza">
+      <img src="https://www.uniondehermandades.com/wp-content/uploads/2018/12/2-10.jpg"
+           alt="Cristo de la Buena Muerte">
+      <div class="rotulo">
+        <p class="numero">V · Buena Muerte</p>
+        <h2>Santísimo Cristo de la Buena Muerte</h2>
+        <p>Quinto momento del pregón</p>
       </div>
     </article>
 
-    <article class="foto">
-      <img
-        src="https://www.jerez.es/fileadmin/DesarrolloWeb/ESPECIALES/MAGNA_MARIANA_JEREZ_2024/IMG_2_capturas/VALLE.JPG"
-        alt="Virgen del Valle">
-      <div class="texto-foto">
-        <h2>VI. Virgen del Valle</h2>
-        <p>Una mirada de devoción a Nuestra Señora del Valle.</p>
+    <article class="pieza">
+      <img src="https://www.jerez.es/fileadmin/DesarrolloWeb/ESPECIALES/MAGNA_MARIANA_JEREZ_2024/IMG_2_capturas/VALLE.JPG"
+           alt="Virgen del Valle">
+      <div class="rotulo">
+        <p class="numero">VI · Virgen del Valle</p>
+        <h2>Nuestra Señora del Valle</h2>
+        <p>Sexto momento del pregón</p>
       </div>
     </article>
 
-    <button class="flecha anterior" onclick="cambiarFoto(-1)" aria-label="Fotografía anterior">‹</button>
-    <button class="flecha siguiente" onclick="cambiarFoto(1)" aria-label="Fotografía siguiente">›</button>
+    <button class="flecha anterior" onclick="cambiar(-1)" aria-label="Anterior">‹</button>
+    <button class="flecha siguiente" onclick="cambiar(1)" aria-label="Siguiente">›</button>
 
   </section>
 
-  <div class="puntos" id="puntos"></div>
+  <nav class="puntos" id="puntos" aria-label="Seleccionar fragmento"></nav>
 
   <section class="controles">
-    <button class="boton" onclick="escucharFragmento()">▶ Escuchar fragmento</button>
-    <button class="boton" onclick="detenerFragmento()">Ⅱ Detener audio</button>
-    <div class="estado" id="estado">Selecciona una fotografía y pulsa «Escuchar fragmento».</div>
+    <button class="boton" onclick="escuchar()">▶ Escuchar fragmento</button>
+    <button class="boton" onclick="detener()">Ⅱ Detener</button>
+    <p id="estado">Selecciona uno de los seis momentos y pulsa «Escuchar fragmento».</p>
   </section>
 
   <div class="volver">
-    <a class="boton" href="index.html">← Volver al Museo de los Pregoneros</a>
+    <a href="index.html">← Volver a la portada</a>
   </div>
-
 </main>
 
-<footer>
-  Museo de los Pregoneros · Semana Santa de Jerez
-</footer>
+<div class="reproductor-oculto">
+  <div id="pregón"></div>
+</div>
 
 <script>
+const videoId = "wEm7skASx2k";
+
 const fragmentos = [
   { titulo: "Mayor Dolor", inicio: 2870, fin: 3044 },
   { titulo: "Desconsuelo", inicio: 3190, fin: 3356 },
@@ -332,119 +328,136 @@ const fragmentos = [
   { titulo: "Virgen del Valle", inicio: 8586, fin: 8694 }
 ];
 
+const piezas = Array.from(document.querySelectorAll(".pieza"));
+const puntos = document.getElementById("puntos");
+const estado = document.getElementById("estado");
+
 let indice = 0;
-let reproductor;
-let reproductorListo = false;
-let comprobador = null;
+let player = null;
+let listo = false;
+let revision = null;
+let reproduciendoIndice = -1;
+let solicitud = 0;
 
-function mostrarFoto(n) {
-  const fotos = document.querySelectorAll(".foto");
-  const puntos = document.querySelectorAll(".punto");
+fragmentos.forEach((fragmento, i) => {
+  const punto = document.createElement("button");
+  punto.className = "punto" + (i === 0 ? " activo" : "");
+  punto.title = fragmento.titulo;
+  punto.setAttribute("aria-label", fragmento.titulo);
+  punto.addEventListener("click", () => seleccionar(i));
+  puntos.appendChild(punto);
+});
 
-  indice = (n + fotos.length) % fotos.length;
+function mostrar(indiceNuevo) {
+  indice = (indiceNuevo + piezas.length) % piezas.length;
 
-  fotos.forEach((foto, i) => {
-    foto.classList.toggle("activa", i === indice);
+  piezas.forEach((pieza, i) => {
+    pieza.classList.toggle("activa", i === indice);
   });
 
-  puntos.forEach((punto, i) => {
+  Array.from(puntos.children).forEach((punto, i) => {
     punto.classList.toggle("activo", i === indice);
   });
-
-  document.getElementById("estado").textContent =
-    "Fragmento seleccionado: " + fragmentos[indice].titulo + ". Pulsa «Escuchar fragmento».";
 }
 
-function cambiarFoto(direccion) {
-  detenerComprobador();
-  if (reproductor && reproductorListo) {
-    reproductor.pauseVideo();
+function pararRevision() {
+  if (revision !== null) {
+    clearInterval(revision);
+    revision = null;
   }
-  mostrarFoto(indice + direccion);
 }
 
-function crearPuntos() {
-  const contenedor = document.getElementById("puntos");
+function detener() {
+  solicitud++;
+  pararRevision();
+  reproduciendoIndice = -1;
 
-  fragmentos.forEach((fragmento, i) => {
-    const boton = document.createElement("button");
-    boton.className = "punto" + (i === 0 ? " activo" : "");
-    boton.setAttribute("aria-label", "Ver fragmento " + (i + 1) + ": " + fragmento.titulo);
-    boton.title = fragmento.titulo;
-    boton.addEventListener("click", () => {
-      detenerComprobador();
-      if (reproductor && reproductorListo) {
-        reproductor.pauseVideo();
-      }
-      mostrarFoto(i);
-    });
-    contenedor.appendChild(boton);
-  });
+  if (player && listo) {
+    player.pauseVideo();
+  }
+
+  estado.textContent = "Fragmento detenido.";
 }
 
-function escucharFragmento() {
-  if (!reproductorListo || !reproductor) {
-    document.getElementById("estado").textContent =
-      "El reproductor se está preparando. Espera unos segundos y vuelve a pulsar.";
+function seleccionar(n) {
+  detener();
+  mostrar(n);
+  estado.textContent = "Seleccionado: " + fragmentos[indice].titulo +
+    ". Pulsa «Escuchar fragmento».";
+}
+
+function cambiar(direccion) {
+  seleccionar(indice + direccion);
+}
+
+function escuchar() {
+  if (!listo || !player) {
+    estado.textContent = "El reproductor se está cargando. Espera unos segundos.";
     return;
   }
 
-  detenerComprobador();
+  pararRevision();
 
+  const miSolicitud = ++solicitud;
   const fragmento = fragmentos[indice];
+  reproduciendoIndice = indice;
 
-  reproductor.loadVideoById({
-    videoId: "wEm7skASx2k",
-    startSeconds: fragmento.inicio,
-    endSeconds: fragmento.fin
+  estado.textContent = "Preparando el fragmento: " + fragmento.titulo + "...";
+
+  player.loadVideoById({
+    videoId: videoId,
+    startSeconds: fragmento.inicio
   });
 
-  document.getElementById("estado").textContent =
-    "Escuchando: " + fragmento.titulo + ". La fotografía avanzará al terminar el fragmento.";
+  let inicioConfirmado = false;
 
-  comprobador = setInterval(() => {
-    if (!reproductor || !reproductorListo) return;
-
-    const tiempo = reproductor.getCurrentTime();
-    const estadoVideo = reproductor.getPlayerState();
-
-    if (tiempo >= fragmento.fin - 0.5 || estadoVideo === YT.PlayerState.ENDED) {
-      detenerComprobador();
-      reproductor.pauseVideo();
-
-      if (indice < fragmentos.length - 1) {
-        mostrarFoto(indice + 1);
-      } else {
-        document.getElementById("estado").textContent =
-          "Has terminado los seis fragmentos del pregón. Gracias por visitar esta sala.";
-      }
+  revision = setInterval(() => {
+    if (miSolicitud !== solicitud || !player || !listo) {
+      pararRevision();
+      return;
     }
-  }, 400);
-}
 
-function detenerFragmento() {
-  detenerComprobador();
+    const estadoVideo = player.getPlayerState();
 
-  if (reproductor && reproductorListo) {
-    reproductor.pauseVideo();
-  }
+    if (estadoVideo === YT.PlayerState.PLAYING) {
+      const tiempo = player.getCurrentTime();
 
-  document.getElementById("estado").textContent =
-    "Audio detenido. Puedes volver a escuchar el fragmento cuando quieras.";
-}
+      if (!inicioConfirmado) {
+        if (tiempo < fragmento.inicio - 3) {
+          player.seekTo(fragmento.inicio, true);
+          return;
+        }
 
-function detenerComprobador() {
-  if (comprobador !== null) {
-    clearInterval(comprobador);
-    comprobador = null;
-  }
+        inicioConfirmado = true;
+        estado.textContent = "Escuchando: " + fragmento.titulo;
+      }
+
+      if (tiempo >= fragmento.fin) {
+        pararRevision();
+        player.pauseVideo();
+        reproduciendoIndice = -1;
+
+        if (indice < fragmentos.length - 1) {
+          mostrar(indice + 1);
+          estado.textContent = "Fragmento terminado. Siguiente: " +
+            fragmentos[indice].titulo + ". Pulsa «Escuchar fragmento» para oírlo.";
+        } else {
+          estado.textContent = "Has llegado al final de los seis fragmentos del pregón.";
+        }
+      }
+    } else if (estadoVideo === YT.PlayerState.ENDED) {
+      pararRevision();
+      reproduciendoIndice = -1;
+      estado.textContent = "El vídeo ha terminado antes de completar el fragmento.";
+    }
+  }, 250);
 }
 
 function onYouTubeIframeAPIReady() {
-  reproductor = new YT.Player("pregón", {
+  player = new YT.Player("pregón", {
     height: "1",
     width: "1",
-    videoId: "wEm7skASx2k",
+    videoId: videoId,
     playerVars: {
       autoplay: 0,
       controls: 0,
@@ -453,22 +466,21 @@ function onYouTubeIframeAPIReady() {
     },
     events: {
       onReady: function() {
-        reproductorListo = true;
+        listo = true;
       },
       onError: function() {
-        document.getElementById("estado").textContent =
-          "No se ha podido cargar el vídeo. Comprueba que el enlace de YouTube siga disponible.";
+        estado.textContent =
+          "No se ha podido reproducir el pregón. Comprueba que el vídeo esté disponible.";
       }
     }
   });
 }
 
-crearPuntos();
-
-const etiquetaAPI = document.createElement("script");
-etiquetaAPI.src = "https://www.youtube.com/iframe_api";
-document.head.appendChild(etiquetaAPI);
+const api = document.createElement("script");
+api.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(api);
 </script>
 
 </body>
 </html>
+
