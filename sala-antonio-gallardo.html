@@ -315,6 +315,8 @@ header p {
   <div id="pregón"></div>
 </div>
 
+
+  ```html
 <script>
 const videoId = "wEm7skASx2k";
 
@@ -334,7 +336,11 @@ const estado = document.getElementById("estado");
 let indice = 0;
 let player = null;
 let listo = false;
-let fragmentoEnCurso = false;
+let controlAudio = null;
+let inicioSolicitado = 0;
+let finSolicitado = 0;
+let solicitudActiva = false;
+let inicioAjustado = false;
 
 fragmentos.forEach((fragmento, i) => {
   const punto = document.createElement("button");
@@ -357,8 +363,16 @@ function mostrar(n) {
   });
 }
 
+function pararControl() {
+  if (controlAudio !== null) {
+    clearInterval(controlAudio);
+    controlAudio = null;
+  }
+}
+
 function detener() {
-  fragmentoEnCurso = false;
+  solicitudActiva = false;
+  pararControl();
 
   if (player && listo) {
     player.stopVideo();
@@ -370,7 +384,8 @@ function detener() {
 function seleccionar(n) {
   detener();
   mostrar(n);
-  estado.textContent = "Seleccionado: " + fragmentos[indice].titulo +
+  estado.textContent =
+    "Seleccionado: " + fragmentos[indice].titulo +
     ". Pulsa «Escuchar fragmento».";
 }
 
@@ -380,20 +395,63 @@ function cambiar(direccion) {
 
 function escuchar() {
   if (!listo || !player) {
-    estado.textContent = "YouTube se está cargando. Espera unos segundos y vuelve a pulsar.";
+    estado.textContent =
+      "El reproductor se está cargando. Espera unos segundos.";
     return;
   }
 
+  pararControl();
+
   const fragmento = fragmentos[indice];
-  fragmentoEnCurso = true;
 
-  estado.textContent = "Cargando el fragmento: " + fragmento.titulo + "...";
+  inicioSolicitado = fragmento.inicio;
+  finSolicitado = fragmento.fin;
+  solicitudActiva = true;
+  inicioAjustado = false;
 
-  player.loadVideoById({
-    videoId: videoId,
-    startSeconds: fragmento.inicio,
-    endSeconds: fragmento.fin
-  });
+  estado.textContent = "Abriendo el fragmento: " + fragmento.titulo;
+
+  // Carga el vídeo directamente en el minuto solicitado.
+  player.loadVideoById(videoId, fragmento.inicio);
+}
+
+function controlarTiempo() {
+  if (!solicitudActiva || !player || !listo) return;
+
+  const estadoVideo = player.getPlayerState();
+
+  if (estadoVideo !== YT.PlayerState.PLAYING) return;
+
+  let tiempo = player.getCurrentTime();
+
+  // Si YouTube no ha respetado el minuto inicial, lo ajustamos.
+  if (!inicioAjustado && tiempo < inicioSolicitado - 2) {
+    player.seekTo(inicioSolicitado, true);
+    inicioAjustado = true;
+    return;
+  }
+
+  inicioAjustado = true;
+
+  estado.textContent =
+    "Escuchando: " + fragmentos[indice].titulo;
+
+  // Detiene el audio justo al llegar al final de este fragmento.
+  if (tiempo >= finSolicitado) {
+    solicitudActiva = false;
+    pararControl();
+    player.pauseVideo();
+
+    if (indice < fragmentos.length - 1) {
+      mostrar(indice + 1);
+      estado.textContent =
+        "Fragmento terminado. Ahora puedes escuchar: " +
+        fragmentos[indice].titulo;
+    } else {
+      estado.textContent =
+        "Has terminado los seis fragmentos del pregón.";
+    }
+  }
 }
 
 function onYouTubeIframeAPIReady() {
@@ -410,29 +468,29 @@ function onYouTubeIframeAPIReady() {
     events: {
       onReady: function() {
         listo = true;
-        estado.textContent = "Listo. Elige un fragmento para escucharlo.";
+        estado.textContent =
+          "Listo. Elige un fragmento para escucharlo.";
       },
 
       onStateChange: function(event) {
-        if (event.data === YT.PlayerState.PLAYING && fragmentoEnCurso) {
-          estado.textContent = "Escuchando: " + fragmentos[indice].titulo;
+        if (event.data === YT.PlayerState.PLAYING) {
+          pararControl();
+          controlAudio = setInterval(controlarTiempo, 200);
         }
 
-        if (event.data === YT.PlayerState.ENDED && fragmentoEnCurso) {
-          fragmentoEnCurso = false;
-
-          if (indice < fragmentos.length - 1) {
-            mostrar(indice + 1);
-            estado.textContent = "Fragmento terminado. Pulsa «Escuchar fragmento» para oír el siguiente.";
-          } else {
-            estado.textContent = "Has terminado los seis fragmentos del pregón.";
-          }
+        if (event.data === YT.PlayerState.ENDED && solicitudActiva) {
+          solicitudActiva = false;
+          pararControl();
+          estado.textContent =
+            "El vídeo ha terminado antes del final del fragmento.";
         }
       },
 
       onError: function() {
-        fragmentoEnCurso = false;
-        estado.textContent = "YouTube no ha podido reproducir este vídeo. Comprueba que el pregón esté disponible.";
+        solicitudActiva = false;
+        pararControl();
+        estado.textContent =
+          "No se ha podido reproducir el pregón de YouTube.";
       }
     }
   });
@@ -442,6 +500,18 @@ const api = document.createElement("script");
 api.src = "https://www.youtube.com/iframe_api";
 document.head.appendChild(api);
 </script>
+
+
+
+
+  
+ 
+  
+
+  
+
+
+      
 
 </body>
 </html>
