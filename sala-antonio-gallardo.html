@@ -13,7 +13,7 @@
 body {
   margin: 0;
   background: #050505;
-  color: #fff;
+  color: white;
   font-family: Georgia, "Times New Roman", serif;
 }
 
@@ -54,7 +54,6 @@ header p {
   display: none;
   position: absolute;
   inset: 0;
-  background: #080808;
 }
 
 .pieza.activa { display: block; }
@@ -73,8 +72,8 @@ header p {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,.03) 40%,
-    rgba(0,0,0,.2) 58%,
+    rgba(0,0,0,.02) 40%,
+    rgba(0,0,0,.18) 60%,
     rgba(0,0,0,.88) 100%
   );
   pointer-events: none;
@@ -100,7 +99,7 @@ header p {
 
 .rotulo h2 {
   margin: 0 0 7px;
-  color: #fff;
+  color: white;
   font-size: clamp(23px, 2.4vw, 32px);
   font-weight: normal;
 }
@@ -169,7 +168,7 @@ header p {
 }
 
 .boton:hover {
-  color: #fff;
+  color: white;
   border-color: #e0b321;
 }
 
@@ -194,12 +193,13 @@ header p {
 
 .volver a:hover { color: white; }
 
+/* El reproductor conserva un tamaño compatible con YouTube */
 .reproductor-oculto {
   position: fixed;
-  left: -10000px;
+  left: -1000px;
   top: 0;
-  width: 1px;
-  height: 1px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -296,7 +296,6 @@ header p {
 
     <button class="flecha anterior" onclick="cambiar(-1)" aria-label="Anterior">‹</button>
     <button class="flecha siguiente" onclick="cambiar(1)" aria-label="Siguiente">›</button>
-
   </section>
 
   <nav class="puntos" id="puntos" aria-label="Seleccionar fragmento"></nav>
@@ -304,7 +303,7 @@ header p {
   <section class="controles">
     <button class="boton" onclick="escuchar()">▶ Escuchar fragmento</button>
     <button class="boton" onclick="detener()">Ⅱ Detener</button>
-    <p id="estado">Selecciona uno de los seis momentos y pulsa «Escuchar fragmento».</p>
+    <p id="estado">Selecciona un momento y pulsa «Escuchar fragmento».</p>
   </section>
 
   <div class="volver">
@@ -328,16 +327,14 @@ const fragmentos = [
   { titulo: "Virgen del Valle", inicio: 8586, fin: 8694 }
 ];
 
-const piezas = Array.from(document.querySelectorAll(".pieza"));
+const piezas = [...document.querySelectorAll(".pieza")];
 const puntos = document.getElementById("puntos");
 const estado = document.getElementById("estado");
 
 let indice = 0;
 let player = null;
 let listo = false;
-let revision = null;
-let reproduciendoIndice = -1;
-let solicitud = 0;
+let fragmentoEnCurso = false;
 
 fragmentos.forEach((fragmento, i) => {
   const punto = document.createElement("button");
@@ -348,32 +345,23 @@ fragmentos.forEach((fragmento, i) => {
   puntos.appendChild(punto);
 });
 
-function mostrar(indiceNuevo) {
-  indice = (indiceNuevo + piezas.length) % piezas.length;
+function mostrar(n) {
+  indice = (n + piezas.length) % piezas.length;
 
   piezas.forEach((pieza, i) => {
     pieza.classList.toggle("activa", i === indice);
   });
 
-  Array.from(puntos.children).forEach((punto, i) => {
+  [...puntos.children].forEach((punto, i) => {
     punto.classList.toggle("activo", i === indice);
   });
 }
 
-function pararRevision() {
-  if (revision !== null) {
-    clearInterval(revision);
-    revision = null;
-  }
-}
-
 function detener() {
-  solicitud++;
-  pararRevision();
-  reproduciendoIndice = -1;
+  fragmentoEnCurso = false;
 
   if (player && listo) {
-    player.pauseVideo();
+    player.stopVideo();
   }
 
   estado.textContent = "Fragmento detenido.";
@@ -392,71 +380,26 @@ function cambiar(direccion) {
 
 function escuchar() {
   if (!listo || !player) {
-    estado.textContent = "El reproductor se está cargando. Espera unos segundos.";
+    estado.textContent = "YouTube se está cargando. Espera unos segundos y vuelve a pulsar.";
     return;
   }
 
-  pararRevision();
-
-  const miSolicitud = ++solicitud;
   const fragmento = fragmentos[indice];
-  reproduciendoIndice = indice;
+  fragmentoEnCurso = true;
 
-  estado.textContent = "Preparando el fragmento: " + fragmento.titulo + "...";
+  estado.textContent = "Cargando el fragmento: " + fragmento.titulo + "...";
 
   player.loadVideoById({
     videoId: videoId,
-    startSeconds: fragmento.inicio
+    startSeconds: fragmento.inicio,
+    endSeconds: fragmento.fin
   });
-
-  let inicioConfirmado = false;
-
-  revision = setInterval(() => {
-    if (miSolicitud !== solicitud || !player || !listo) {
-      pararRevision();
-      return;
-    }
-
-    const estadoVideo = player.getPlayerState();
-
-    if (estadoVideo === YT.PlayerState.PLAYING) {
-      const tiempo = player.getCurrentTime();
-
-      if (!inicioConfirmado) {
-        if (tiempo < fragmento.inicio - 3) {
-          player.seekTo(fragmento.inicio, true);
-          return;
-        }
-
-        inicioConfirmado = true;
-        estado.textContent = "Escuchando: " + fragmento.titulo;
-      }
-
-      if (tiempo >= fragmento.fin) {
-        pararRevision();
-        player.pauseVideo();
-        reproduciendoIndice = -1;
-
-        if (indice < fragmentos.length - 1) {
-          mostrar(indice + 1);
-          estado.textContent = "Fragmento terminado. Siguiente: " +
-            fragmentos[indice].titulo + ". Pulsa «Escuchar fragmento» para oírlo.";
-        } else {
-          estado.textContent = "Has llegado al final de los seis fragmentos del pregón.";
-        }
-      }
-    } else if (estadoVideo === YT.PlayerState.ENDED) {
-      pararRevision();
-      reproduciendoIndice = -1;
-      estado.textContent = "El vídeo ha terminado antes de completar el fragmento.";
-    }
-  }, 250);
 }
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player("pregón", {
-    height: "1",
-    width: "1",
+    height: "200",
+    width: "200",
     videoId: videoId,
     playerVars: {
       autoplay: 0,
@@ -467,10 +410,29 @@ function onYouTubeIframeAPIReady() {
     events: {
       onReady: function() {
         listo = true;
+        estado.textContent = "Listo. Elige un fragmento para escucharlo.";
       },
+
+      onStateChange: function(event) {
+        if (event.data === YT.PlayerState.PLAYING && fragmentoEnCurso) {
+          estado.textContent = "Escuchando: " + fragmentos[indice].titulo;
+        }
+
+        if (event.data === YT.PlayerState.ENDED && fragmentoEnCurso) {
+          fragmentoEnCurso = false;
+
+          if (indice < fragmentos.length - 1) {
+            mostrar(indice + 1);
+            estado.textContent = "Fragmento terminado. Pulsa «Escuchar fragmento» para oír el siguiente.";
+          } else {
+            estado.textContent = "Has terminado los seis fragmentos del pregón.";
+          }
+        }
+      },
+
       onError: function() {
-        estado.textContent =
-          "No se ha podido reproducir el pregón. Comprueba que el vídeo esté disponible.";
+        fragmentoEnCurso = false;
+        estado.textContent = "YouTube no ha podido reproducir este vídeo. Comprueba que el pregón esté disponible.";
       }
     }
   });
@@ -483,4 +445,6 @@ document.head.appendChild(api);
 
 </body>
 </html>
+
+
 
